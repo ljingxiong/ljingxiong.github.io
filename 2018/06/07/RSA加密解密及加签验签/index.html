@@ -6,19 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://ljingxiong.github.io">
-  <title>Archives: 2018/5 | 渭水飞熊の博客</title>
+  <title>RSA加密解密及加签验签 | 渭水飞熊の博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="纸上得来终觉浅，绝知此事要躬行;">
-<meta name="keywords" content="渭水飞熊 博客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="渭水飞熊の博客">
-<meta property="og:url" content="https://ljingxiong.github.io/archives/2018/05/index.html">
+  <meta name="description" content="1.RSA安全性应用场景说明　　在刚接触RSA的时候，会混淆RSA加密解密和RSA加签验签的概念。简单来说加密解密是公钥加密私钥解密，持有公钥（多人持有）可以对数据加密，但是只有持有私钥（一人持有）才可以解密并查看数据；加签验签是私钥加签公钥验签，持有私钥（一人持有）可以加签，持有公钥（多人持有）可以验签。 　　在金融行业在设计到数据交互传输的时候，需要考虑数据的安全性问题。下文通过介绍RSA的加">
+<meta name="keywords" content="RSA,安全性">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RSA加密解密及加签验签">
+<meta property="og:url" content="https://ljingxiong.github.io/2018/06/07/RSA加密解密及加签验签/index.html">
 <meta property="og:site_name" content="渭水飞熊の博客">
-<meta property="og:description" content="纸上得来终觉浅，绝知此事要躬行;">
+<meta property="og:description" content="1.RSA安全性应用场景说明　　在刚接触RSA的时候，会混淆RSA加密解密和RSA加签验签的概念。简单来说加密解密是公钥加密私钥解密，持有公钥（多人持有）可以对数据加密，但是只有持有私钥（一人持有）才可以解密并查看数据；加签验签是私钥加签公钥验签，持有私钥（一人持有）可以加签，持有公钥（多人持有）可以验签。 　　在金融行业在设计到数据交互传输的时候，需要考虑数据的安全性问题。下文通过介绍RSA的加">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="https://ljingxiong.github.io/assets/blogImages/RSA加密加签流程图.png">
+<meta property="og:updated_time" content="2018-06-07T07:48:09.621Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="渭水飞熊の博客">
-<meta name="twitter:description" content="纸上得来终觉浅，绝知此事要躬行;">
+<meta name="twitter:title" content="RSA加密解密及加签验签">
+<meta name="twitter:description" content="1.RSA安全性应用场景说明　　在刚接触RSA的时候，会混淆RSA加密解密和RSA加签验签的概念。简单来说加密解密是公钥加密私钥解密，持有公钥（多人持有）可以对数据加密，但是只有持有私钥（一人持有）才可以解密并查看数据；加签验签是私钥加签公钥验签，持有私钥（一人持有）可以加签，持有公钥（多人持有）可以验签。 　　在金融行业在设计到数据交互传输的时候，需要考虑数据的安全性问题。下文通过介绍RSA的加">
+<meta name="twitter:image" content="https://ljingxiong.github.io/assets/blogImages/RSA加密加签流程图.png">
   
     <link rel="alternative" href="/atom.xml" title="渭水飞熊の博客" type="application/atom+xml">
   
@@ -152,236 +155,177 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-RSA加密解密及加签验签" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      RSA加密解密及加签验签
+    </h1>
+  
+
+        
+        <a href="/2018/06/07/RSA加密解密及加签验签/" class="archive-article-date">
+  	<time datetime="2018-06-07T04:55:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-07</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h5 id="1-RSA安全性应用场景说明"><a href="#1-RSA安全性应用场景说明" class="headerlink" title="1.RSA安全性应用场景说明"></a>1.RSA安全性应用场景说明</h5><p>　　在刚接触RSA的时候，会混淆RSA加密解密和RSA加签验签的概念。简单来说加密解密是公钥加密私钥解密，持有公钥（多人持有）可以对数据加密，但是只有持有私钥（一人持有）才可以解密并查看数据；加签验签是私钥加签公钥验签，持有私钥（一人持有）可以加签，持有公钥（多人持有）可以验签。</p>
+<p>　　在金融行业在设计到数据交互传输的时候，需要考虑数据的安全性问题。下文通过介绍RSA的加密和加签两个特性，说明RSA加密技术在保障数据传输过程中的安全性以及实现数据的防篡改和防否机制的应用场景及代码实现。<br><a id="more"></a></p>
+<h5 id="2-RSA在数据安全上的应用"><a href="#2-RSA在数据安全上的应用" class="headerlink" title="2.RSA在数据安全上的应用"></a>2.RSA在数据安全上的应用</h5><p><strong> 加密：数据传输的安全性 </strong><br>　　RSA加密解密主要应用于数据传输的安全性上。通过公钥加密、私钥解密的方式，可以达到公钥持有者能够加密数据，但只有私钥持有者才能够解密数据。通过加密传输数据能够避免被第三方截取者轻易的拦截数据，而通过RSA非对称加密的特性也能够较好的保证第三方截取者在没有私钥的情况下读取数据内容。</p>
+<p><strong> 加签：数据的防篡改、防否认机制 </strong><br>　　数据的的防否认机制是指数据的接收者可以明确的知道数据的发送人。RSA的数字签名技术是将摘要信息用发送者的私钥（有且只有一人持有）加密，与原文一起传送给接收者。接收者只有用发送者的公钥才能解密被加密的摘要信息，然后用HASH函数对收到的原文产生一个摘要信息，与解密的摘要信息对比。如果相同，则说明数据是有持有私钥的发送者发出的（其他人没有私钥，无法生成一致的摘要信息）。因此在此基础上可以认为有且只有一个私钥的持有者才可以加签，达到数据的防止篡改防否认机制。</p>
+<h5 id="3-RSA数据安全传输的实现"><a href="#3-RSA数据安全传输的实现" class="headerlink" title="3.RSA数据安全传输的实现"></a>3.RSA数据安全传输的实现</h5><p>基于RSA的加密和验签功能，在对于数据传输安全性要求较高的交互应用中，可以对原始数据进行加密加签。具体流程如下图↓<br><img src="/assets/blogImages/RSA加密加签流程图.png" alt="RSA加密加签流程图"></p>
+<p>示例工程<br>　　GitHub项目地址：<a href="https://github.com/suyin58/rsa-demo" target="_blank" rel="noopener">https://github.com/suyin58/rsa-demo</a></p>
+<h5 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h5><p>   <a href="https://www.cnblogs.com/loveyou/p/7299524.html" target="_blank" rel="noopener">月·漩涡</a></p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>又有鸡腿吃了<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/05/21/想学CSS应该如何入门/" class="archive-article-date">
-  	<time datetime="2018-05-21T09:23:48.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/05/21/想学CSS应该如何入门/">想学CSS应该如何入门</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">前端</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">RSA</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">CSS</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">安全性</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://ljingxiong.github.io/2018/06/07/RSA加密解密及加签验签/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/05/18/SublimeText-常用插件/" class="archive-article-date">
-  	<time datetime="2018-05-18T03:50:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-18</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2018/05/21/想学CSS应该如何入门/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">想学CSS应该如何入门</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/05/18/SublimeText-常用插件/">SublimeText 常用插件</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">前端</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Sublime Text</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/05/18/CSS-之-Normalize-css/" class="archive-article-date">
-  	<time datetime="2018-05-18T01:47:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-18</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/05/18/CSS-之-Normalize-css/">CSS 之 Normalize.css</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">前端</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">CSS</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/05/17/Sublime-Text-快捷键/" class="archive-article-date">
-  	<time datetime="2018-05-17T08:07:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-17</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/05/17/Sublime-Text-快捷键/">Sublime Text 常用快捷键</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">前端</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Sublime Text</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">快捷键</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">IDE</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/05/16/HelloWorld/" class="archive-article-date">
-  	<time datetime="2018-05-16T03:55:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-16</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/05/16/HelloWorld/">HelloWorld</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">开篇</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -406,8 +350,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
