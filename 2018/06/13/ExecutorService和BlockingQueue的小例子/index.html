@@ -6,23 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://ljingxiong.github.io">
-  <title>HelloWorld | 渭水飞熊の博客</title>
+  <title>ExecutorService和BlockingQueue的小例子 | 渭水飞熊の博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="有什么正在崩塌,有什么正在破土;">
-<meta name="keywords" content="开篇">
+  <meta name="description" content="需求，学校组织学生自愿验血，来了三个医生，抽血速度依次为1000,2000，3000毫秒。 抽血屋子较小，最多能容纳9个学生，即排队，每个医生最多排3个人。 如果来的学生看到屋子满了，就离开，不验了。">
+<meta name="keywords" content="Java,线程池,队列,线程池+队列">
 <meta property="og:type" content="article">
-<meta property="og:title" content="HelloWorld">
-<meta property="og:url" content="https://ljingxiong.github.io/2018/05/16/HelloWorld/index.html">
+<meta property="og:title" content="ExecutorService和BlockingQueue的小例子">
+<meta property="og:url" content="https://ljingxiong.github.io/2018/06/13/ExecutorService和BlockingQueue的小例子/index.html">
 <meta property="og:site_name" content="渭水飞熊の博客">
-<meta property="og:description" content="有什么正在崩塌,有什么正在破土;">
+<meta property="og:description" content="需求，学校组织学生自愿验血，来了三个医生，抽血速度依次为1000,2000，3000毫秒。 抽血屋子较小，最多能容纳9个学生，即排队，每个医生最多排3个人。 如果来的学生看到屋子满了，就离开，不验了。">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://ljingxiong.github.io/assets/avatar.jpg">
-<meta property="og:image" content="https://ljingxiong.github.io/assets/avatar.jpg">
-<meta property="og:updated_time" content="2018-05-21T07:08:04.219Z">
+<meta property="og:updated_time" content="2018-06-13T03:59:00.078Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="HelloWorld">
-<meta name="twitter:description" content="有什么正在崩塌,有什么正在破土;">
-<meta name="twitter:image" content="https://ljingxiong.github.io/assets/avatar.jpg">
+<meta name="twitter:title" content="ExecutorService和BlockingQueue的小例子">
+<meta name="twitter:description" content="需求，学校组织学生自愿验血，来了三个医生，抽血速度依次为1000,2000，3000毫秒。 抽血屋子较小，最多能容纳9个学生，即排队，每个医生最多排3个人。 如果来的学生看到屋子满了，就离开，不验了。">
   
     <link rel="alternative" href="/atom.xml" title="渭水飞熊の博客" type="application/atom+xml">
   
@@ -156,101 +153,41 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-HelloWorld" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-ExecutorService和BlockingQueue的小例子" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      HelloWorld
+      ExecutorService和BlockingQueue的小例子
     </h1>
   
 
         
-        <a href="/2018/05/16/HelloWorld/" class="archive-article-date">
-  	<time datetime="2018-05-16T03:55:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-16</time>
+        <a href="/2018/06/13/ExecutorService和BlockingQueue的小例子/" class="archive-article-date">
+  	<time datetime="2018-06-13T03:41:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-13</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <pre><code>有什么正在崩塌,有什么正在破土;
-</code></pre><a id="more"></a><!--文章太长，截断按钮文字-->
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pulbic <span class="class"><span class="keyword">class</span> <span class="title">HelloWorld</span></span>&#123;</span><br><span class="line">    System.out.println(<span class="string">"Hello World"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<!-- 设置颜色与字体 -->
-<font face="微软雅黑" color="red" size="5">设置颜色与字体</font>
-
-<!--行内标签-->
-<p> <code>Ctrl + D</code> </p>
-<!--图片-->
-<p><img src="/assets/avatar.jpg" alt="LOGO">   ===  <img src="/assets/avatar.jpg" alt="LOGO1"></p>
-<!--链接-->
-<p><a href="/">本文</a>   ===  <a href="/">本文</a></p>
-<!--置于文未，相当于引用，对应图片的logo-->
-<!--标题-->
-<h6 id="请求参数"><a href="#请求参数" class="headerlink" title="请求参数"></a>请求参数</h6><!-- 表格 -->
-<table>
-<thead>
-<tr>
-<th style="text-align:left">参数</th>
-<th style="text-align:left">必选</th>
-<th style="text-align:left">类型</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">name</td>
-<td style="text-align:left">ture</td>
-<td style="text-align:left">string</td>
-<td>请求的项目名</td>
-</tr>
-<tr>
-<td style="text-align:left">type</td>
-<td style="text-align:left">true</td>
-<td style="text-align:left">int</td>
-<td>请求项目的类型。1：类型一；2：类型二 。</td>
-</tr>
-</tbody>
-</table>
-<!--斜体、粗体-->
-<p><em>斜体文本</em>    <em>斜体文本</em><br><strong>粗体文本</strong>    <strong>粗体文本</strong><br><strong><em>粗斜体文本</em></strong>    <strong><em>粗斜体文本</em></strong></p>
-<p>普通无序列表</p>
-<ul>
-<li>列表文本前使用 [减号+空格]</li>
-</ul>
-<ul>
-<li>列表文本前使用 [加号+空格]</li>
-</ul>
-<ul>
-<li>列表文本前使用 [星号+空格]</li>
-</ul>
-<p>普通有序列表</p>
-<ol>
-<li>列表前使用 [数字+空格]</li>
-<li>我们会自动帮你添加数字</li>
-<li>不用担心数字不对，显示的时候我们会自动把这行的 7 纠正为 3</li>
-</ol>
-<p>列表嵌套</p>
-<ol>
-<li>列出所有元素：<ul>
-<li>无序列表元素 A<ol>
-<li>元素 A 的有序子列表</li>
-</ol>
-</li>
-<li>前面加四个空格</li>
-</ul>
-</li>
-<li>列表里的多段换行：<br> 前面必须加四个空格，<br> 这样换行，整体的格式不会乱</li>
-<li><p>列表里引用：</p>
-<blockquote>
-<p>前面空一行<br>仍然需要在 &gt;  前面加四个空格</p>
-</blockquote>
-</li>
-</ol>
-<p>　　　　我推荐全角空格，切换到全角模式下（一般的中文输入法都是按 shift + space）输入两个空格就行了。这个相对 &nbsp; 来说稍微干净一点，而且宽度是整整两个汉字，很整齐。</p>
+        <p>需求，学校组织学生自愿验血，来了三个医生，抽血速度依次为1000,2000，3000毫秒。</p>
+<p>抽血屋子较小，最多能容纳9个学生，即排队，每个医生最多排3个人。</p>
+<p>如果来的学生看到屋子满了，就离开，不验了。<br><a id="more"></a>r</p>
+<p>先建立学生的一个简单类，标记不同学生。</p>
+<p><code>Student.java</code><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Student</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> id;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getId</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setId</span><span class="params">(<span class="keyword">int</span> id)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.id = id;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>医生的线程池<br>学生来了之后，先看看屋里满了没，如果慢了，扭头就走，如果没满，找一个人数最少的队排。<br><code>DoctorFactory.java</code><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DoctorFactory</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Object locker=<span class="keyword">new</span> Object();</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Integer MAX_QUEUE_SIZE=<span class="number">3</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span>  DoctorFactory doctorFactory=<span class="keyword">null</span>;</span><br><span class="line">    <span class="keyword">private</span> Integer doctorCount=<span class="number">3</span>;</span><br><span class="line">    <span class="keyword">private</span> List&lt;BlockingQueue&lt;Student&gt;&gt; studentQueueList=<span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">DoctorFactory</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        ExecutorService executor = Executors.newFixedThreadPool(doctorCount); <span class="comment">//线程池</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; doctorCount; i++) &#123;</span><br><span class="line">            BlockingQueue&lt;Student&gt; recoDataBlockingQueue = <span class="keyword">new</span> ArrayBlockingQueue&lt;Student&gt;(MAX_QUEUE_SIZE);</span><br><span class="line">            studentQueueList.add(recoDataBlockingQueue);</span><br><span class="line">            <span class="keyword">int</span> time=(i+<span class="number">1</span>)*<span class="number">1000</span>;</span><br><span class="line">            executor.execute(<span class="keyword">new</span> DetectRunnable(Integer.toString(i),time, recoDataBlockingQueue));</span><br><span class="line">        &#125;</span><br><span class="line">        executor.shutdown(); <span class="comment">//关闭执行器，不允许继续提交其它线程</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> DoctorFactory <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (doctorFactory == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">synchronized</span> (locker) &#123;</span><br><span class="line">                <span class="keyword">if</span> (doctorFactory == <span class="keyword">null</span>) &#123;</span><br><span class="line">                    doctorFactory = <span class="keyword">new</span> DoctorFactory();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> doctorFactory;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">putStudentData</span><span class="params">(Student student)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">int</span> pos = findShortQueue();</span><br><span class="line">            BlockingQueue&lt;Student&gt; studentBlockingQueue = studentQueueList.get(pos);</span><br><span class="line">            <span class="keyword">if</span> (studentBlockingQueue != <span class="keyword">null</span>) &#123;</span><br><span class="line">                <span class="keyword">if</span> (studentBlockingQueue.size() &gt;= MAX_QUEUE_SIZE) &#123;</span><br><span class="line">                    System.out.println(<span class="string">"student "</span>+ student.getId()+<span class="string">" go"</span>);</span><br><span class="line">                    <span class="keyword">throw</span> <span class="keyword">new</span> Exception(<span class="string">"人数爆了！"</span>);</span><br><span class="line">                &#125;</span><br><span class="line">                System.out.println(<span class="string">"student "</span>+ student.getId()+<span class="string">" enter "</span>+<span class="string">" dotctor "</span>+pos);</span><br><span class="line">                studentBlockingQueue.put(student);</span><br><span class="line">             &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">findShortQueue</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> pos = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> size = MAX_QUEUE_SIZE;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; studentQueueList.size(); i++) &#123;</span><br><span class="line">            BlockingQueue&lt;Student&gt; studentBlockingQueue = studentQueueList.get(i);</span><br><span class="line">            <span class="keyword">if</span> (studentBlockingQueue != <span class="keyword">null</span>) &#123;</span><br><span class="line">                <span class="keyword">if</span> (studentBlockingQueue.size() &lt; size) &#123;</span><br><span class="line">                    size = studentBlockingQueue.size();</span><br><span class="line">                    pos = i;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> pos;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>医生检查学生的线程<br><code>DetectRunnable.java</code><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DetectRunnable</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">DetectRunnable</span><span class="params">(String name,Integer detectTime, BlockingQueue&lt;Student&gt; studentQueue)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.studentQueue = studentQueue;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">        <span class="keyword">this</span>.detectTime=detectTime;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> BlockingQueue&lt;Student&gt; studentQueue;</span><br><span class="line">    <span class="keyword">private</span> Integer detectTime=<span class="number">1000</span>;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">while</span> (<span class="keyword">true</span>)&#123;</span><br><span class="line">            <span class="keyword">try</span>&#123;</span><br><span class="line">                Student student=studentQueue.take();</span><br><span class="line">                Thread.sleep(detectTime);</span><br><span class="line">                System.out.println(<span class="string">"doctor:"</span> + name + <span class="string">" detect student:"</span> + student.getId() +<span class="string">" end time "</span> + detectTime);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">catch</span>(Exception e)&#123;&#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>测试<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testThread</span><span class="params">()</span></span>&#123;</span><br><span class="line">    DoctorFactory doctorFactory=DoctorFactory.getInstance();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">20</span>;i++)</span><br><span class="line">    &#123;</span><br><span class="line"></span><br><span class="line">        Student student=<span class="keyword">new</span> Student();</span><br><span class="line">        student.setId(i);</span><br><span class="line">        doctorFactory.putStudentData(student);</span><br><span class="line">        <span class="keyword">try</span>&#123; Thread.sleep(<span class="number">200</span>);&#125;</span><br><span class="line">        <span class="keyword">catch</span> (Exception ex)&#123;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">    System.out.println(<span class="string">"end"</span>);</span><br><span class="line">    <span class="keyword">try</span>&#123;System.in.read();&#125;</span><br><span class="line">    <span class="keyword">catch</span> (Exception ex)&#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>测试结果<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">student <span class="number">0</span> enter  dotctor <span class="number">0</span></span><br><span class="line">student <span class="number">1</span> enter  dotctor <span class="number">0</span></span><br><span class="line">student <span class="number">2</span> enter  dotctor <span class="number">1</span></span><br><span class="line">student <span class="number">3</span> enter  dotctor <span class="number">1</span></span><br><span class="line">student <span class="number">4</span> enter  dotctor <span class="number">2</span></span><br><span class="line">doctor:<span class="number">0</span> detect student:<span class="number">0</span> end time <span class="number">1000</span></span><br><span class="line">student <span class="number">5</span> enter  dotctor <span class="number">0</span></span><br><span class="line">student <span class="number">6</span> enter  dotctor <span class="number">2</span></span><br><span class="line">student <span class="number">7</span> enter  dotctor <span class="number">0</span></span><br><span class="line">student <span class="number">8</span> enter  dotctor <span class="number">1</span></span><br><span class="line">student <span class="number">9</span> enter  dotctor <span class="number">2</span></span><br><span class="line">doctor:<span class="number">0</span> detect student:<span class="number">1</span> end time <span class="number">1000</span></span><br><span class="line">student <span class="number">10</span> enter  dotctor <span class="number">0</span></span><br><span class="line">student <span class="number">11</span> enter  dotctor <span class="number">0</span></span><br><span class="line">doctor:<span class="number">1</span> detect student:<span class="number">2</span> end time <span class="number">2000</span></span><br><span class="line">student <span class="number">12</span> enter  dotctor <span class="number">1</span></span><br><span class="line">student <span class="number">13</span> enter  dotctor <span class="number">1</span></span><br><span class="line">student <span class="number">14</span> enter  dotctor <span class="number">2</span></span><br><span class="line">doctor:<span class="number">0</span> detect student:<span class="number">5</span> end time <span class="number">1000</span></span><br><span class="line">student <span class="number">15</span> enter  dotctor <span class="number">0</span></span><br><span class="line">student <span class="number">16</span> go</span><br><span class="line">student <span class="number">17</span> go</span><br><span class="line">student <span class="number">18</span> go</span><br><span class="line">doctor:<span class="number">2</span> detect student:<span class="number">4</span> end time <span class="number">3000</span></span><br><span class="line">student <span class="number">19</span> enter  dotctor <span class="number">2</span></span><br><span class="line">doctor:<span class="number">0</span> detect student:<span class="number">7</span> end time <span class="number">1000</span></span><br><span class="line">end</span><br><span class="line">doctor:<span class="number">1</span> detect student:<span class="number">3</span> end time <span class="number">2000</span></span><br><span class="line">doctor:<span class="number">0</span> detect student:<span class="number">10</span> end time <span class="number">1000</span></span><br><span class="line">doctor:<span class="number">0</span> detect student:<span class="number">11</span> end time <span class="number">1000</span></span><br><span class="line">doctor:<span class="number">1</span> detect student:<span class="number">8</span> end time <span class="number">2000</span></span><br><span class="line">doctor:<span class="number">2</span> detect student:<span class="number">6</span> end time <span class="number">3000</span></span><br><span class="line">doctor:<span class="number">0</span> detect student:<span class="number">15</span> end time <span class="number">1000</span></span><br><span class="line">doctor:<span class="number">1</span> detect student:<span class="number">12</span> end time <span class="number">2000</span></span><br><span class="line">doctor:<span class="number">2</span> detect student:<span class="number">9</span> end time <span class="number">3000</span></span><br><span class="line">doctor:<span class="number">1</span> detect student:<span class="number">13</span> end time <span class="number">2000</span></span><br><span class="line">doctor:<span class="number">2</span> detect student:<span class="number">14</span> end time <span class="number">3000</span></span><br><span class="line">doctor:<span class="number">2</span> detect student:<span class="number">19</span> end time <span class="number">3000</span></span><br></pre></td></tr></table></figure></p>
+<p>分析<br>每200ms来一个学生，刚开始屋里没人，前几个来的都能很快的排队，检查。</p>
+<p>到16号时，医生忙不过来了，就开始有学生离开。</p>
+<p>一直到19号，屋里才有位置，19号入队检查。</p>
+<p>同时可以看到，医生检查速度不同，最后检查学生的总数也不同，依次为 7，5，5</p>
+<p>有三个学生因为排不上队，离开。</p>
+<p>来源：<a href="https://blog.csdn.net/bornonew/article/details/60573897" target="_blank" rel="noopener">https://blog.csdn.net/bornonew/article/details/60573897</a></p>
 
       
 
@@ -285,7 +222,19 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">开篇</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">线程池</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">队列</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">线程池+队列</a>
         		</li>
       		
 		</ul>
@@ -341,7 +290,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://ljingxiong.github.io/2018/05/16/HelloWorld/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://ljingxiong.github.io/2018/06/13/ExecutorService和BlockingQueue的小例子/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -355,15 +304,11 @@
   
 <nav id="article-nav">
   
-    <a href="/2018/05/17/Sublime-Text-快捷键/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          Sublime Text 常用快捷键
-        
-      </div>
-    </a>
   
+    <a href="/2018/06/07/RSA加密解密及加签验签/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">RSA加密解密及加签验签</div>
+      <i class="icon-circle-right"></i>
+    </a>
   
 </nav>
 
