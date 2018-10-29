@@ -154,6 +154,256 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-MV-简史" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/10/29/MV-简史/">MV*简史</a>
+    </h1>
+  
+
+        
+        <a href="/2018/10/29/MV-简史/" class="archive-article-date">
+  	<time datetime="2018-10-29T06:07:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-29</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>大概是二三十年前， 人类逐渐从命令行界面时代走出来，进化到了GUI时代。<br><img src="/assets/blogImages/mvvm/一个命令行程序.jpg" alt="一个命令行程序"><br>(一个命令行程序)<br>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">前端</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">mvvm</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/10/29/MV-简史/">more >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-前端mvvm原理" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/10/29/前端mvvm原理/">前端mvvm原理</a>
+    </h1>
+  
+
+        
+        <a href="/2018/10/29/前端mvvm原理/" class="archive-article-date">
+  	<time datetime="2018-10-29T05:35:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-29</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h5 id="一、MVVM-背景"><a href="#一、MVVM-背景" class="headerlink" title="一、MVVM 背景"></a>一、MVVM 背景</h5><p>都说懒惰使人进步，MVVM 的进化史，正印证了这句话，是一步步让开发人员更懒惰更简单的历史：</p>
+<blockquote>
+<p>直接 DOM 操作 -&gt; MVC -&gt; MVP -&gt; MVVM</p>
+</blockquote>
+<p>最开始的前端交互，是很直接的 DOM 操作，最出名的这类库当数 jQuery 了，封装了 DOM API，让一切 DOM 操作都变得简单。<br>但当页面数据和交互多的时候，散乱的代码将使项目变得难以维护，让人发狂。所以才有了 MV* 模式的发展。</p>
+<h5 id="二、MV-模式"><a href="#二、MV-模式" class="headerlink" title="二、MV* 模式"></a>二、MV* 模式</h5><p>(1)MVC<br><strong>√</strong> Model：数据模型 &amp; <strong>手动渲染模板</strong><br><strong>√</strong> View：模板<br><strong>√</strong> Controller：修改数据</p>
+<p>(2)MVP<br><strong>√</strong> Model：数据模型<br><strong>√</strong> View：模板<br><strong>√</strong> Presenter：修改数据 &amp; <strong>手动渲染模板</strong><br>MVP 是 MVC 模式的一种改造（这里不说改进，是因为两者其实很相似，没有本质上的变化），将 手动渲染 步骤** 从 Model 移到了 Presenter，让 View 和 Model 更独立更存粹了，但从另一个角度来说，也加大了 Presenter 的工作。</p>
+<p>(3)MVVM<br><strong>√</strong> Model：数据模型<br><strong>√</strong> View：带<strong>特殊属性</strong>的 html 模板<br><strong>√</strong> ViewModel：<strong>依靠 Directive</strong>，修改数据 &amp; <strong>自动渲染</strong><br>MVVM 模式依靠 Directive，实现了 模板自动渲染，极大地解放了开发者的双手，此时开发者只需关注 View 和 Model，效率和可维护性方面达到了飞跃式的进步。</p>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">前端</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">mvvm</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/10/29/前端mvvm原理/">more >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-vue-js-VS-React-js" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/10/29/vue-js-VS-React-js/">vue.js VS. React.js</a>
+    </h1>
+  
+
+        
+        <a href="/2018/10/29/vue-js-VS-React-js/" class="archive-article-date">
+  	<time datetime="2018-10-29T01:43:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-29</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h5 id="前端-MVVM-原理"><a href="#前端-MVVM-原理" class="headerlink" title="前端 MVVM 原理"></a>前端 MVVM 原理</h5><h5 id="SPA-Single-Page-web-Application-的成功离开不这三个东西，分层架构，路由系统，储存系统。"><a href="#SPA-Single-Page-web-Application-的成功离开不这三个东西，分层架构，路由系统，储存系统。" class="headerlink" title="SPA(Single Page web Application)的成功离开不这三个东西，分层架构，路由系统，储存系统。"></a>SPA(Single Page web Application)的成功离开不这三个东西，分层架构，路由系统，储存系统。</h5><p>（1）分层架构是我们组织复杂代码的关键；<br>（2）路由系统是将多个页面压缩在一个页面的关键；<br>（3）储存系统特指本地储存，是安全保存大量数据的关键；</p>
+<h5 id="经典的组合："><a href="#经典的组合：" class="headerlink" title="经典的组合："></a>经典的组合：</h5><p>vue+ vue-route(路由) 单纯依赖于vue.js<br>vue+ vue-route(路由) +vuex（存储系统）  依赖vue.js,vuex；<br>饿了么：<a href="http://element.eleme.io/#/zh-CN/component/installation" target="_blank" rel="noopener">http://element.eleme.io/#/zh-CN/component/installation</a></p>
+<p>react(ui) +react-router(路由) + redux（存储系统）(redux-saga)<br>蚂蚁金服：antd-pro dva</p>
+<p>这两个框架的路线有差异，Vue 偏向大而全，把很多特性都封装进核心库，<br>React 则不同，React 核心库只是 React 生态圈很小一部分，只负责 view 这个层面，其它事情都是由大家一起完成，所以 React 会有这么多插件。</p>
+<p>Reactjs 和 Vuejs 都是伟大的框架！</p>
+<h5 id="单向-双向绑定"><a href="#单向-双向绑定" class="headerlink" title="单向/双向绑定"></a>单向/双向绑定</h5>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">前端</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Vue.js</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">React.js</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/10/29/vue-js-VS-React-js/">more >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-what-java-util-collection-should-i-use" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -730,263 +980,6 @@
 
 
   
-    <article id="post-SublimeText-常用插件" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/18/SublimeText-常用插件/">SublimeText 常用插件</a>
-    </h1>
-  
-
-        
-        <a href="/2018/05/18/SublimeText-常用插件/" class="archive-article-date">
-  	<time datetime="2018-05-18T03:50:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-18</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <pre><code>*********    安装插件前要先安装 Package Control    *********
-
-&gt;&gt;&gt;&gt;&gt; SideBarEnhancements 增强Side Bar面板的功能，增加右键功能；
-
-&gt;&gt;&gt;&gt;&gt; SyncedSideBar 自动展开你所打开的文件所在的目录
-
-&gt;&gt;&gt;&gt;&gt; DocBlockr 在代码中输入&quot;/*&quot;或者&quot;\/\**&quot;，然后回车，DocBlockr会自动生成注释行
-
-&gt;&gt;&gt;&gt;&gt; Emmet 一款功能非常强大的HTML代码补全插件   (详细介绍：https://segmentfault.com/a/1190000007812543)
-</code></pre>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">前端</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Sublime Text</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/05/18/SublimeText-常用插件/">more >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-CSS-之-Normalize-css" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/18/CSS-之-Normalize-css/">CSS 之 Normalize.css</a>
-    </h1>
-  
-
-        
-        <a href="/2018/05/18/CSS-之-Normalize-css/" class="archive-article-date">
-  	<time datetime="2018-05-18T01:47:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-18</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p><a href="http://necolas.github.io/normalize.css" target="_blank" rel="noopener">Normalize.css 项目地址</a><br><a href="https://github.com/necolas/normalize.css" target="_blank" rel="noopener">Normalize.css 在GitHub上的源码</a><br><a href="https://github.com/Alsiso/normalize-zh" target="_blank" rel="noopener">中文版normalize-zh.css</a></p>
-</blockquote>
-<h3 id="如何使用-normalize-css"><a href="#如何使用-normalize-css" class="headerlink" title="如何使用 normalize.css"></a>如何使用 normalize.css</h3><p>首先，从上面的地址中下载<code>Normalize.css</code>，接下来有两种主要途径去使用它。</p>
-<ul>
-<li>策略一：将<code>Normalize.css</code>作为你自己项目的基础CSS，<strong><em>自定义样式值</em></strong>以满足设计师的需求。</li>
-<li>策略二：引入<code>Normalize.css</code>源码并在此基础上构建，在必要的时候用你自己写的CSS<strong><em>覆盖默认值</em></strong>。
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">前端</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">CSS</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/05/18/CSS-之-Normalize-css/">more >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Sublime-Text-快捷键" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/17/Sublime-Text-快捷键/">Sublime Text 常用快捷键</a>
-    </h1>
-  
-
-        
-        <a href="/2018/05/17/Sublime-Text-快捷键/" class="archive-article-date">
-  	<time datetime="2018-05-17T08:07:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-17</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><code>Ctrl + Shift + ←|→</code>     可快速选中一行中的某一部分（相当于双击鼠标选中）。<br><code>Ctrl + Shift + ↑|↓</code>     光标所在的行上移或下移<br><code>Ctrl + Shift + D</code>     复制光标所在的行（或选中的内容）<br><code>Ctrl + Shift + M</code>     选中花括号里面的全部内容不包括{}<br><code>Ctrl + Shift + K</code>    删除选中的整行（可多行） <code>Ctrl + X</code>  删除光标所在的行<br><code>Ctrl + Shift + P</code>  打开命令面板<br>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">前端</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Sublime Text</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">快捷键</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">IDE</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/05/17/Sublime-Text-快捷键/">more >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1123,6 +1116,18 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">mvvm</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">RSA</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">安全性</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Sublime Text</a>
               </li>
              
@@ -1135,11 +1140,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">RSA</a>
+                <a href="javascript:void(0)" class="js-tag color2">Vue.js</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">安全性</a>
+                <a href="javascript:void(0)" class="js-tag color4">React.js</a>
               </li>
              
               <li class="article-tag-list-item">
