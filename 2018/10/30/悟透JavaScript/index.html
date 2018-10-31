@@ -6,19 +6,25 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://ljingxiong.github.io">
-  <title>Tag: Java | 渭水飞熊の博客</title>
+  <title>悟透JavaScript | 渭水飞熊の博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="纸上得来终觉浅，绝知此事要躬行;">
-<meta name="keywords" content="渭水飞熊 博客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="渭水飞熊の博客">
-<meta property="og:url" content="https://ljingxiong.github.io/tags/Java/index.html">
+  <meta name="description" content="1. 透彻解读prototype与 __proto__ 首先，要千万记住一点：__proto__是每个对象都有的一个属性，而prototype是函数才会有的属性!!!  总而言之，Fun.prototype 为自对象 ， Fun.prototype.__proto__为继承对象，自对象和继承对象的并集，构成了新建函数对象的属性和方法。obj（new Fun）.__proto__实质上等于Fun.p">
+<meta name="keywords" content="JavaScript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="悟透JavaScript">
+<meta property="og:url" content="https://ljingxiong.github.io/2018/10/30/悟透JavaScript/index.html">
 <meta property="og:site_name" content="渭水飞熊の博客">
-<meta property="og:description" content="纸上得来终觉浅，绝知此事要躬行;">
+<meta property="og:description" content="1. 透彻解读prototype与 __proto__ 首先，要千万记住一点：__proto__是每个对象都有的一个属性，而prototype是函数才会有的属性!!!  总而言之，Fun.prototype 为自对象 ， Fun.prototype.__proto__为继承对象，自对象和继承对象的并集，构成了新建函数对象的属性和方法。obj（new Fun）.__proto__实质上等于Fun.p">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="https://ljingxiong.github.io/assets/blogImages/javascript/prototype.png">
+<meta property="og:image" content="https://ljingxiong.github.io/assets/blogImages/javascript/prototype1.png">
+<meta property="og:image" content="https://ljingxiong.github.io/assets/blogImages/javascript/prototype2.png">
+<meta property="og:image" content="https://ljingxiong.github.io/assets/blogImages/javascript/$provider.png">
+<meta property="og:updated_time" content="2018-10-30T08:19:16.468Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="渭水飞熊の博客">
-<meta name="twitter:description" content="纸上得来终觉浅，绝知此事要躬行;">
+<meta name="twitter:title" content="悟透JavaScript">
+<meta name="twitter:description" content="1. 透彻解读prototype与 __proto__ 首先，要千万记住一点：__proto__是每个对象都有的一个属性，而prototype是函数才会有的属性!!!  总而言之，Fun.prototype 为自对象 ， Fun.prototype.__proto__为继承对象，自对象和继承对象的并集，构成了新建函数对象的属性和方法。obj（new Fun）.__proto__实质上等于Fun.p">
+<meta name="twitter:image" content="https://ljingxiong.github.io/assets/blogImages/javascript/prototype.png">
   
     <link rel="alternative" href="/atom.xml" title="渭水飞熊の博客" type="application/atom+xml">
   
@@ -152,198 +158,216 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-悟透JavaScript" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      悟透JavaScript
+    </h1>
+  
+
+        
+        <a href="/2018/10/30/悟透JavaScript/" class="archive-article-date">
+  	<time datetime="2018-10-30T01:33:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-30</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h5 id="1-透彻解读prototype与-proto"><a href="#1-透彻解读prototype与-proto" class="headerlink" title="1. 透彻解读prototype与 __proto__"></a>1. 透彻解读prototype与 <code>__proto__</code></h5><p><strong> 首先，要千万记住一点：<code>__proto__</code>是每个对象都有的一个属性，而prototype是函数才会有的属性!!! </strong><br><strong> 总而言之，Fun.prototype 为自对象 ， <code>Fun.prototype.__proto__</code>为继承对象，自对象和继承对象的并集，构成了新建函数对象的属性和方法。<code>obj（new Fun）.__proto__</code>实质上等于Fun.prototype，技巧性记住这几点即可。</strong><br>function Person() { } 是函数，var person 则是对象。  当自对象与继承对象间有相同属性或方法名称时，自对象优先级较高。<br><a id="more"></a></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> p = &#123;</span><br><span class="line">	c: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">		<span class="built_in">console</span>.log(<span class="string">'c'</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line">Person.prototype.a = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">"a"</span>);</span><br><span class="line">&#125;</span><br><span class="line">Person.prototype.__proto__ = p;</span><br><span class="line">Person.prototype.__proto__.b = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">"b"</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> person = <span class="keyword">new</span> Person();</span><br><span class="line"> </span><br><span class="line">person.d=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">"d"</span>);</span><br><span class="line">&#125;;</span><br><span class="line">person.d(); <span class="comment">// 自对象方法 d</span></span><br><span class="line">person.a(); <span class="comment">// 继承对象方法 a</span></span><br><span class="line">person.b(); <span class="comment">// 继承对象方法 b</span></span><br><span class="line">person.c(); <span class="comment">// 继承对象方法 c</span></span><br><span class="line"><span class="built_in">console</span>.log(person.hasOwnProperty(<span class="string">"a"</span>)); <span class="comment">//false 继承而来非自有，故为false</span></span><br><span class="line"><span class="built_in">console</span>.log(person.hasOwnProperty(<span class="string">"b"</span>)); <span class="comment">//false 继承而来非自有，故为false</span></span><br><span class="line"><span class="built_in">console</span>.log(person.hasOwnProperty(<span class="string">"c"</span>)); <span class="comment">//false 继承而来非自有，故为false</span></span><br><span class="line"><span class="built_in">console</span>.log(person.hasOwnProperty(<span class="string">"d"</span>)); <span class="comment">//true  是否包括自有属性</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//1.自对象优先级较高。</span></span><br><span class="line">person.a = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">"person.a"</span>);</span><br><span class="line">&#125;</span><br><span class="line">person.a();<span class="comment">//person.a </span></span><br><span class="line"></span><br><span class="line"><span class="comment">//2.若此时有一个函数POP想要继承Person函数所有的属性和方法呢？这时请使用Object.getPrototypeOf( )。实现如下：</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">POP</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line">POP.prototype.__proto__ = <span class="built_in">Object</span>.getPrototypeOf(person);</span><br><span class="line"><span class="keyword">var</span> pop = <span class="keyword">new</span> POP();</span><br><span class="line">pop.a(); <span class="comment">//a</span></span><br><span class="line">pop.b(); <span class="comment">//b</span></span><br><span class="line">pop.c(); <span class="comment">//c</span></span><br><span class="line"></span><br><span class="line">person.__proto__ = p; <span class="comment">//会破坏原有自对象属性和方法  等价Person.propertype = p</span></span><br><span class="line">person.a();</span><br><span class="line"><span class="comment">//person.__proto__实质上就是Person.prototype，例子中person.__proto__ = p;重新赋值，已经破坏了原有自对象数据，但并不影响继承对象，因此b,c,d方法可以执行，a方法执行时将找不到。</span></span><br></pre></td></tr></table></figure>
+<p>参考资料：<a href="https://blog.csdn.net/zeping891103/article/details/79215201" target="_blank" rel="noopener">https://blog.csdn.net/zeping891103/article/details/79215201</a><br><img src="/assets/blogImages/javascript/prototype.png" width="30%" height="550px"><img src="/assets/blogImages/javascript/prototype1.png" width="30%" height="550px"><img src="/assets/blogImages/javascript/prototype2.png" width="30%" height="550px"></p>
+<h5 id="2-call、apply、bind"><a href="#2-call、apply、bind" class="headerlink" title="2. call、apply、bind"></a>2. call、apply、bind</h5><p>JavaScript中函数可以通过3种方法改变自己的this指向，它们是call、apply、bind。它们3个非常相似，但是也有区别。下面表格可以很直观看出三者的不同</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">方法</th>
+<th style="text-align:left">是否直接执行函数</th>
+<th style="text-align:left">传入的参数</th>
+<th>调用方式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">call</td>
+<td style="text-align:left">是</td>
+<td style="text-align:left">(context,arg1,arg2,arg3…)第二个参数之后都是实参</td>
+<td>function.call(context,arg1,arg2,arg3…)</td>
+</tr>
+<tr>
+<td style="text-align:left">apply</td>
+<td style="text-align:left">是</td>
+<td style="text-align:left">(context,[arg1,arg2,arg3…])第二个参数必须是数组</td>
+<td>function.apply(context,[arg1,arg2,arg3…])</td>
+</tr>
+<tr>
+<td style="text-align:left">bind</td>
+<td style="text-align:left">否</td>
+<td style="text-align:left">(context,arg1,arg2,arg3…)第二个参数之后都是实参</td>
+<td>var newFunction = function.bind(context); newFunction(arg1,arg2,arg3…)</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var a = &#123;x: 1&#125;;</span><br><span class="line">    var b = function (y, z) &#123;</span><br><span class="line">        console.log(this.x + y + z)</span><br><span class="line">    &#125;;</span><br><span class="line">    b.call(a, 3, 4);//此时b的this（即b执行时的上下文）被改变为a，因此this.x为1，第二个参数之后都是传给b实参。</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var a = &#123;x: 1&#125;;</span><br><span class="line">    var b = function (arr) &#123;</span><br><span class="line">        console.log(this.x + arr[0] + arr[1])</span><br><span class="line">    &#125;;</span><br><span class="line">    b.apply(a, [3, 4]);//此时b的this（即b执行时的上下文）被改变为a，第二个参数是一个数组</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var a = &#123;x: 1&#125;;</span><br><span class="line">    var b = function (y, z) &#123;</span><br><span class="line">        console.log(this.x + y + z)</span><br><span class="line">    &#125;;</span><br><span class="line">    var newB = b.bind(a);//此时b的this（即b执行时的上下文）被改变为a，由此生成一个新函数，函数不会立即执行。</span><br><span class="line">    newB(3, 4);//函数此时才执行</span><br></pre></td></tr></table></figure>
+<h5 id="3-angularjs依赖注入原理与实现"><a href="#3-angularjs依赖注入原理与实现" class="headerlink" title="3.angularjs依赖注入原理与实现"></a>3.angularjs依赖注入原理与实现</h5><p>推荐：<a href="https://segmentfault.com/a/1190000003096933" target="_blank" rel="noopener">https://segmentfault.com/a/1190000003096933</a><br><img src="/assets/blogImages/javascript/$provider.png" alt="$provider"><br>$provide服务负责告诉Angular如何创造一个新的可注入的东西：即服务。服务(services)会被叫做供应商(providers)的东西来定义，你可以使用$provide来创建一个供应商(providers)。你需要使用$provide中的provider()方法来定义一个供应商，同时你也可以通过要求$provide被注入到一个应用的config函数中来获得$provide服务。</p>
+<p><strong>供应商是用来提供服务的，被注入来注入去的东西就是供应商们提供的服务了</strong><br>service 一旦被定义后就可以在任何地方通过依赖的方式调用且可以保存数据，直到应用结束,而controller则一旦路由发生变化controller 就会失效，下次打开页面就需要重新加载保存数据。援引angular团队的原话：<br>Services are designed to be the glue between controllers, the minions of data, the slaves of functionality, the worker-bees of our application<br>翻译一下：services是被用来设计成controller之间的胶水，数据的走狗，方法的奴隶，它就是我们程序的工蜂！</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> app = angular.module(<span class="string">'app'</span>, []);</span><br><span class="line"><span class="comment">//1.factory....</span></span><br><span class="line">app.config(<span class="function"><span class="keyword">function</span> (<span class="params">$provide</span>) </span>&#123;</span><br><span class="line">  $provide.factory(<span class="string">'movie'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      title: <span class="string">'The Matrix'</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br><span class="line">对应的语法糖：</span><br><span class="line">app.factory(<span class="string">'movie'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    title: <span class="string">'The Matrix'</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">//2.service</span></span><br><span class="line">app.config(<span class="function"><span class="keyword">function</span> (<span class="params">$provide</span>) </span>&#123;</span><br><span class="line">  $provide.service(<span class="string">'movie'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.title = <span class="string">'The Matrix'</span>;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br><span class="line"> 对应的语法糖：</span><br><span class="line">app.service(<span class="string">'movie'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.title = <span class="string">'The Matrix'</span>;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">//3.provider</span></span><br><span class="line">app.provider(<span class="string">'movie'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> version;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    setVersion: <span class="function"><span class="keyword">function</span> (<span class="params">value</span>) </span>&#123;</span><br><span class="line">      version = value;</span><br><span class="line">    &#125;,</span><br><span class="line">    $get: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> &#123;</span><br><span class="line">          title: <span class="string">'The Matrix'</span> + <span class="string">' '</span> + version</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">//movie+Provider</span></span><br><span class="line"><span class="comment">//注入到config中不能直接写movie，因为前文讲了注入的那个东西就是服务，是供应商提供出来的，而config中又只能注入供应商.（两个例外是$provide和$injector），所以用驼峰命名法写成movieProvider，Angular就会帮你注入它的供应商</span></span><br><span class="line">app.config(<span class="function"><span class="keyword">function</span> (<span class="params">movieProvider</span>) </span>&#123;</span><br><span class="line">  movieProvider.setVersion(<span class="string">'Reloaded'</span>);</span><br><span class="line">&#125;);</span><br><span class="line"> </span><br><span class="line"></span><br><span class="line"><span class="comment">//4.注入服务，使用服务</span></span><br><span class="line">app.controller(<span class="string">'ctrl'</span>, [<span class="string">'movie'</span>,<span class="function"><span class="keyword">function</span> (<span class="params">movie</span>) </span>&#123;</span><br><span class="line">  expect(movie.title).toEqual(<span class="string">'The Matrix'</span>);</span><br><span class="line">&#125;]);</span><br></pre></td></tr></table></figure>
+<p>总结：</p>
+<ul>
+<li>所有的供应商都只被实例化一次，也就说他们都是单例的</li>
+<li>除了constant，所有的供应商都可以被装饰器(decorator)装饰</li>
+<li>value就是一个简单的可注入的值</li>
+<li>service是一个可注入的构造器</li>
+<li>factory是一个可注入的方法</li>
+<li>decorator可以修改或封装其他的供应商，当然除了constant</li>
+<li>provider是一个可配置的factory</li>
+</ul>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>又有鸡腿吃了<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/08/07/what-java-util-collection-should-i-use/" class="archive-article-date">
-  	<time datetime="2018-08-07T09:32:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-07</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/08/07/what-java-util-collection-should-i-use/">what java.util.collection should i use</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">JavaScript</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://ljingxiong.github.io/2018/10/30/悟透JavaScript/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/08/07/Comparable-Comparator区别-comparator升序降序实现/" class="archive-article-date">
-  	<time datetime="2018-08-07T06:46:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-07</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2018/10/29/MV-简史/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">MV*简史</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/08/07/Comparable-Comparator区别-comparator升序降序实现/">Comparable Comparator区别 comparator升序降序实现</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Comparator</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Comparable</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">升序降序</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/08/07/BigDecimal注意事项/" class="archive-article-date">
-  	<time datetime="2018-08-07T01:29:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-07</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/08/07/BigDecimal注意事项/">BigDecimal注意事项</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/06/13/ExecutorService和BlockingQueue的小例子/" class="archive-article-date">
-  	<time datetime="2018-06-13T03:41:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-13</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/06/13/ExecutorService和BlockingQueue的小例子/">ExecutorService和BlockingQueue的小例子</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">线程池</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">队列</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">线程池+队列</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -368,9 +392,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
