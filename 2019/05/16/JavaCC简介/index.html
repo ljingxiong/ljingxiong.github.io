@@ -6,19 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://ljingxiong.github.io">
-  <title>Tag: IDE | 渭水飞熊の博客</title>
+  <title>JavaCC简介 | 渭水飞熊の博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="纸上得来终觉浅，绝知此事要躬行;">
-<meta name="keywords" content="渭水飞熊 博客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="渭水飞熊の博客">
-<meta property="og:url" content="https://ljingxiong.github.io/tags/IDE/index.html">
+  <meta name="description" content="语法描述文件12345678910111213141516options &amp;#123;  JavaCC 的选项 //执行java -cp javacc.jar javacc查看&amp;#125;PARSER_BEGIN(解析器类名)package 包名;import 库名;public class 解析器类名 &amp;#123;  任意的Java代码&amp;#125;PARSER_END (解析器类名)扫描器的描述">
+<meta name="keywords" content="java,javacc,编译原理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaCC简介">
+<meta property="og:url" content="https://ljingxiong.github.io/2019/05/16/JavaCC简介/index.html">
 <meta property="og:site_name" content="渭水飞熊の博客">
-<meta property="og:description" content="纸上得来终觉浅，绝知此事要躬行;">
+<meta property="og:description" content="语法描述文件12345678910111213141516options &amp;#123;  JavaCC 的选项 //执行java -cp javacc.jar javacc查看&amp;#125;PARSER_BEGIN(解析器类名)package 包名;import 库名;public class 解析器类名 &amp;#123;  任意的Java代码&amp;#125;PARSER_END (解析器类名)扫描器的描述">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-05-21T02:27:18.957Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="渭水飞熊の博客">
-<meta name="twitter:description" content="纸上得来终觉浅，绝知此事要躬行;">
+<meta name="twitter:title" content="JavaCC简介">
+<meta name="twitter:description" content="语法描述文件12345678910111213141516options &amp;#123;  JavaCC 的选项 //执行java -cp javacc.jar javacc查看&amp;#125;PARSER_BEGIN(解析器类名)package 包名;import 库名;public class 解析器类名 &amp;#123;  任意的Java代码&amp;#125;PARSER_END (解析器类名)扫描器的描述">
   
     <link rel="alternative" href="/atom.xml" title="渭水飞熊の博客" type="application/atom+xml">
   
@@ -152,72 +153,208 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-JavaCC简介" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/05/17/Sublime-Text-快捷键/" class="archive-article-date">
-  	<time datetime="2018-05-17T08:07:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-17</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/05/17/Sublime-Text-快捷键/">Sublime Text 常用快捷键</a>
+    <h1 class="article-title" itemprop="name">
+      JavaCC简介
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2019/05/16/JavaCC简介/" class="archive-article-date">
+  	<time datetime="2019-05-16T03:00:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-16</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h5 id="语法描述文件"><a href="#语法描述文件" class="headerlink" title="语法描述文件"></a>语法描述文件</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">options &#123;</span><br><span class="line">  JavaCC 的选项 <span class="comment">//执行java -cp javacc.jar javacc查看</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">PARSER_BEGIN(解析器类名)</span><br><span class="line"><span class="keyword">package</span> 包名;</span><br><span class="line"><span class="keyword">import</span> 库名;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> 解析器类名 </span>&#123;</span><br><span class="line">  任意的Java代码</span><br><span class="line">&#125;</span><br><span class="line">PARSER_END (解析器类名)</span><br><span class="line"></span><br><span class="line">扫描器的描述</span><br><span class="line"></span><br><span class="line">解析器的描述</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<p>Example<br>如下代码是一个解析正整数加法运算并进行计算的解析器的语法描述文件。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">options &#123;</span><br><span class="line">  STATIC = <span class="keyword">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">PARSER_BEGIN(Person)</span><br><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line"> <span class="function"><span class="keyword">static</span> <span class="keyword">public</span> <span class="keyword">void</span> <span class="title">main</span> <span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">for</span> (String arg : args) &#123;</span><br><span class="line">   <span class="keyword">try</span> &#123;</span><br><span class="line">    System.out.println(evaluate(arg));</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">catch</span> (ParseException ex) &#123;</span><br><span class="line">    System.err.println(ex.getMessage);</span><br><span class="line">   &#125;</span><br><span class="line">  &#125;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> <span class="function"><span class="keyword">static</span> <span class="keyword">public</span> <span class="keyword">long</span> <span class="title">evaluate</span> <span class="params">(String src)</span> <span class="keyword">throws</span> ParseException </span>&#123;</span><br><span class="line">  Reader reader = <span class="keyword">new</span> StringReader(src);</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> Person(reader).expr();</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br><span class="line">PARSER_END(Person)</span><br><span class="line"></span><br><span class="line">SKIP: &#123; &lt; [<span class="string">" "</span>,<span class="string">"\t"</span>,<span class="string">"\r"</span>,<span class="string">"\n"</span>] &gt; &#125;</span><br><span class="line"></span><br><span class="line">TOKEN: &#123;</span><br><span class="line"> &lt;INTEGER: ([<span class="string">"0"</span>-<span class="string">"9"</span>])+&gt;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">long</span> <span class="title">expr</span><span class="params">()</span>:</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"> Token x,y;</span><br><span class="line">&#125;</span><br><span class="line">&#123;</span><br><span class="line"> x=&lt;INTEGER&gt; <span class="string">"+"</span> y=&lt;INTEGER&gt; &lt;EOF&gt;</span><br><span class="line"> &#123;</span><br><span class="line">   <span class="keyword">return</span> Long.parseLong(x.image) + Long.parseLong(y.image);</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>javacc6.0执行语句如下<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">java -cp javacc.jar jjtree ***.jjt</span><br><span class="line">java -cp javacc.jar javacc ***.jj</span><br></pre></td></tr></table></figure></p>
+<h5 id="JavaCC简介"><a href="#JavaCC简介" class="headerlink" title="JavaCC简介"></a>JavaCC简介</h5><p>JavaCC是一个词法分析器和语法分析器的生成器。用于java领域，根据指定格式的输入文件生成java源码的词法、语法分析程序（比lex和yacc要人性化）。<br>JavaCC采用的是自顶向下的分析方法，而且没有回溯功能，因此如何解决冲突的问题，是程序员的责任。<br>JavaCC是LL解析器生成器，可处理的语法范围比较狭窄，但支持无限长的token超前扫描。<br>JavaCC本身既不是一个词法分析器，也不是一个语法分析器，而是根据指定的规则生成两者的生成器。</p>
+<h5 id="JavaCC的功能"><a href="#JavaCC的功能" class="headerlink" title="JavaCC的功能"></a>JavaCC的功能</h5><p>总体来说，JavaCC主要有以下功能：</p>
+<blockquote>
+<p>1.JavaCC用来处理语法文件（jj）生成解析代码。<br>2.JJTree 用来处理jjt文件，生成树节点代码和jj文件。<br>3.JJDoc 根据jj文件，生成BNF范式(巴科斯-诺尔范式)文档(Html)。</p>
+</blockquote>
+<h5 id="JavaCC的特点"><a href="#JavaCC的特点" class="headerlink" title="JavaCC的特点"></a>JavaCC的特点</h5><p>JavaCC是一个用Java语言写的一个Java语法分析生成器，它所产生的文件都是纯Java代码文件，JavaCC和它所自动生成的语法分析器可以在多个平台上运行。<br>下面是JavaCC的一些具体特点：<br>1.TOP-DOWN：JavaCC产生自顶向下的语法分析器，而YACC等工具则产生的是自底向上的语法分析器。采用自顶向下的分析方法允许更通用的语法（但是包含左递归的语法除外）。自顶向下的语法分析器还有其他的一些优点，比如：易于调试，可以分析语法中的任何非终结符，可以在语法分析的过程中在语法分析树中上下传值等。</p>
+<p>2.LARGE USER COMMUNTIY：是一个用JAVA开发的最受欢迎的语法分析生成器。拥有成百上千的下载量和不计其数是使用者。我们的邮件列表(<a href="https://JavaCC.dev.java.net/doc/mailinglist.html" target="_blank" rel="noopener">https://JavaCC.dev.java.net/doc/mailinglist.html</a> )和新闻组(comp.compilers.tools.JavaCC)里的参与者有1000多人。</p>
+<p>3.LEXICAL AND GRAMMAR SPECIFICATIONS IN ONE FILE：词法规范（如正则表达式、字符串等）和语法规范（BNF范式）书写在同一个文件里。这使得语法易读和易维护。</p>
+<p>4.TREE BUILDING PREPROCESSOR： JavaCC提供的JJTree工具，是一个强有力的语法树构造的预处理程序。</p>
+<p>5.EXTREMELY CUSTOMIZABLE：JavaCC提供了多种不同的选项供用户自定义JavaCC的行为和它所产生的语法分析器的行为。</p>
+<p>6.CERTIFIED TO BE 100% PURE JAVA：JavaCC可以在任何java平台V1.1以后的版本上运行。它可以不需要特别的移植工作便可在多种机器上运行。是Java语言”Write Once, Run Everywhere”特性的证明。</p>
+<p>7.DOCUMENT GENERATION：JavaCC包括一个叫JJDoc的工具，它可以把文法文件转换成文本本件(Html).</p>
+<p>8.MANY MANY EXAMPLES：JavaCC的发行版包括一系列的包括Java和HTML文法的例子。这些例子和相应的文档是学习JavaCC的捷径。</p>
+<p>9.INTERNATIONALIZED：JavaCC的词法分析器可以处理全部的Unicode输入，并且词法规范何以包括任意的Unicode字符。这使得语言元素的描述，例如Java标识符变得容易。</p>
+<p>10.SYNTACTIC AND SEMANTIC LOOKAHEAD SPECIFICATIONS：默认的，JavaCC产生的是LL(1)的语法分析器，然而有许多语法不是LL(1)的。JavaCC提供了根据语法和语义向前看的能力来解决在一些局部的移进-归约的二义性。例如，一个LL(k)的语法分析器只在这些有移进-归约冲突的地方保持LL(k)，而在其他地方为了更好的效率而保持LL(1)。移进-归约和归约-归约冲突不是自顶向下语法分析器的问题。</p>
+<p>11.PERMITS EXTENDED BNF SPECIFICATIONS：JavaCC允许拓展的BNF范式——例如(A)<em>,(A)+等。拓展的BNF范式在某种程度上解决了左递归。事实上，拓展的BNF范式写成A ::= y(x)</em> 或 A ::= Ax|y更容易阅读。</p>
+<p>12.LEXICAL STATES AND LEXICAL ACTIONS：JavaCC提供了像lex的词法状态和词法动作的能力。</p>
+<p>13.CASE-INSENSITIVE LEXICAL ANALYSIS：词法描述可以在整个词法描述的全局域或者独立的词法描述中定义大小写不敏感的Tokens。</p>
+<p>14.EXTENSIVE DEBUGGING CAPABILITIES：使用选项DEBUG_PARSER, DEBUG_LOOKAHEAD, 和 DEBUG_TOKEN_MANAGER，使用者可以在语法分析和Token处理中使用深层次的分析。</p>
+<p>15.SPECIAL TOKENS：Tokens可以在词法说明中被定义成特殊的Tokens从而在语法分析的过程中被忽略，但这些Tokens可以通过工具进行处理。</p>
+<p>16.VERY GOOD ERROR REPORTING：JavaCC的错误提示在众多语法分析生成器中是最好的。JavaCC产生的语法分析器可以清楚的指出语法分析的错误并提供完整的诊断信息。</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>又有鸡腿吃了<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">前端</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Sublime Text</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">javacc</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">快捷键</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">IDE</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">编译原理</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://ljingxiong.github.io/2019/05/16/JavaCC简介/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2019/05/16/编译原理与javacc/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          编译原理与JavaCC
+        
+      </div>
+    </a>
   
   
-    </div></section>
+    <a href="/2018/10/30/悟透JavaScript/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">悟透JavaScript</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -242,9 +379,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,

@@ -6,19 +6,24 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://ljingxiong.github.io">
-  <title>Tag: IDE | 渭水飞熊の博客</title>
+  <title>编译原理与JavaCC | 渭水飞熊の博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="纸上得来终觉浅，绝知此事要躬行;">
-<meta name="keywords" content="渭水飞熊 博客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="渭水飞熊の博客">
-<meta property="og:url" content="https://ljingxiong.github.io/tags/IDE/index.html">
+  <meta name="description" content="编译原理一般的编译过程主要包括词法分析、语法分析、语义分析、中间代码生成、代码优化、目标代码生成。其中，(1) 词法分析主要任务是输入源程序，对构成源程序的程序进行扫描和分解，识别出一个一个的单词(token)。单词是语言中具有独立意义的最基本结构。一般这些单词包括程序语言所支持的保留字、数据类型、操作符、分隔符以及程序定义的标识符、常量等。(2) 语法分析的主要任务是在词法分析的基础上，根据语言">
+<meta name="keywords" content="java,javacc,编译原理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="编译原理与JavaCC">
+<meta property="og:url" content="https://ljingxiong.github.io/2019/05/16/编译原理与javacc/index.html">
 <meta property="og:site_name" content="渭水飞熊の博客">
-<meta property="og:description" content="纸上得来终觉浅，绝知此事要躬行;">
+<meta property="og:description" content="编译原理一般的编译过程主要包括词法分析、语法分析、语义分析、中间代码生成、代码优化、目标代码生成。其中，(1) 词法分析主要任务是输入源程序，对构成源程序的程序进行扫描和分解，识别出一个一个的单词(token)。单词是语言中具有独立意义的最基本结构。一般这些单词包括程序语言所支持的保留字、数据类型、操作符、分隔符以及程序定义的标识符、常量等。(2) 语法分析的主要任务是在词法分析的基础上，根据语言">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="https://ljingxiong.github.io/assets/blogImages/javacc/编译一般过程.png">
+<meta property="og:image" content="https://ljingxiong.github.io/assets/blogImages/javacc/201611010924241299.png">
+<meta property="og:image" content="https://ljingxiong.github.io/assets/blogImages/javacc/20140511134849812.png">
+<meta property="og:updated_time" content="2019-05-21T02:26:12.827Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="渭水飞熊の博客">
-<meta name="twitter:description" content="纸上得来终觉浅，绝知此事要躬行;">
+<meta name="twitter:title" content="编译原理与JavaCC">
+<meta name="twitter:description" content="编译原理一般的编译过程主要包括词法分析、语法分析、语义分析、中间代码生成、代码优化、目标代码生成。其中，(1) 词法分析主要任务是输入源程序，对构成源程序的程序进行扫描和分解，识别出一个一个的单词(token)。单词是语言中具有独立意义的最基本结构。一般这些单词包括程序语言所支持的保留字、数据类型、操作符、分隔符以及程序定义的标识符、常量等。(2) 语法分析的主要任务是在词法分析的基础上，根据语言">
+<meta name="twitter:image" content="https://ljingxiong.github.io/assets/blogImages/javacc/编译一般过程.png">
   
     <link rel="alternative" href="/atom.xml" title="渭水飞熊の博客" type="application/atom+xml">
   
@@ -152,72 +157,199 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-编译原理与javacc" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/05/17/Sublime-Text-快捷键/" class="archive-article-date">
-  	<time datetime="2018-05-17T08:07:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-17</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/05/17/Sublime-Text-快捷键/">Sublime Text 常用快捷键</a>
+    <h1 class="article-title" itemprop="name">
+      编译原理与JavaCC
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2019/05/16/编译原理与javacc/" class="archive-article-date">
+  	<time datetime="2019-05-16T06:40:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-16</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h5 id="编译原理"><a href="#编译原理" class="headerlink" title="编译原理"></a>编译原理</h5><p>一般的编译过程主要包括<code>词法分析</code>、<code>语法分析</code>、<code>语义分析</code>、<code>中间代码生成</code>、<code>代码优化</code>、<code>目标代码生成</code>。<br>其中，<br>(1) <code>词法分析</code>主要任务是输入源程序，对构成源程序的程序进行扫描和分解，识别出一个一个的单词(token)。单词是语言中具有独立意义的最基本结构。一般这些单词包括程序语言所支持的保留字、数据类型、操作符、分隔符以及程序定义的标识符、常量等。<br>(2) <code>语法分析</code>的主要任务是在词法分析的基础上，根据语言的语法规则把单词序列组合成各类语法单位（一般表示成语法树）。<br>(3) <code>语义分析</code>的主要任务是进一步分析语法结构正确的程序是否符合源程序的上下文约束、运算相容性等语义约束规则。<br><img src="/assets/blogImages/javacc/编译一般过程.png" width="30%" height="20%"></p>
+<h5 id="JavaCC-Java-Compiler-Compiler"><a href="#JavaCC-Java-Compiler-Compiler" class="headerlink" title="JavaCC(Java Compiler Compiler)"></a>JavaCC(Java Compiler Compiler)</h5><p>JavaCC是一个词法分析器和语法分析器的生成器。用于java领域，根据指定格式的输入文件生成java源码的词法、语法分析程序（比lex和yacc要人性化）。<br>JavaCC采用的是自顶向下的分析方法，而且没有回溯功能，因此如何解决冲突的问题，是程序员的责任。<br>JavaCC是LL解析器生成器，可处理的语法范围比较狭窄，但支持无限长的token超前扫描。<br>JavaCC本身既不是一个词法分析器，也不是一个语法分析器，而是根据指定的规则生成两者的生成器。</p>
+<blockquote>
+<p>把输入的字符串分解成一个一个的单词，然后把单词序列组合成语法单位，最后依据语言环境所定义的语义约束对这些语法单位进行分析计算。<br>对一个语言的源文件进行解析，主要是做这样几件事：<br>√ 词法分析<br>√ 语法分析<br>√ 语义分析<br><img src="/assets/blogImages/javacc/201611010924241299.png" width="50%" height="20%"></p>
+</blockquote>
+<a id="more"></a>
+<ul>
+<li><p>词法分析<br>所谓词法分析器就是将一系列字符分成一个个的Token，并标记Token的分类。<br>词法分析过程中，读入的是一个个的字符，返回的是记号(token).记号是语法分析所认识的一种抽象的概念。<br>语言中的关键字，变量名，数字，操作符，串等都是记号。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">int x;</span><br><span class="line">x = 0;</span><br><span class="line">上边这些代码，被词法分析器分析之后，应该生成这样的记号：</span><br><span class="line">&lt;int&gt;,空格,&lt;x&gt;,分号,回车换行,&lt;x&gt;,&lt;=&gt;,&lt;0&gt;,分号</span><br></pre></td></tr></table></figure>
+<p>一般而言，在这个过程中，空白字符(空格，tab)都应该被跳过。词法分析中会用到大量的正则表达式，因为正则表达式的表达能力是非常强大的。</p>
+<p>在解析词法分析器之前，首先介绍一下JavaCC的词法状态的概念(lexical state)。<br>有可能存在如下的情况，在不同的情况下，要求的词法词法规则不同，比如我们要解析一个java文件(即满足java语法的表达式)，在默认的状态DEFAULT下，是要求解析的对象(即表达式)满足java语言的词法规则，然而当出现<code>/**</code>的时候，其后面的表达式则不需要满足java语言的语法规则，而是应该满足java注释的语法规则(要识别<code>@param</code>变量等)，于是我们做如下定义：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//默认处于DEFAULT状态，当遇到/**的时候，转换为IN_JAVADOC_COMMENT状态</span></span><br><span class="line">&lt;DEFAULT&gt; </span><br><span class="line">TOKEN : &#123;&lt;STARTDOC : <span class="string">"/**"</span> &gt; : IN_JAVADOC_COMMENT &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//在IN_JAVADOC_COMMENT状态下，需要识别@param变量</span></span><br><span class="line">&lt;IN_JAVADOC_COMMENT&gt;</span><br><span class="line">TOKEN : &#123;&lt;PARAM : <span class="string">"@param"</span> &gt;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//在IN_JAVADOC_COMMENT状态下，遇到*/的时候，转换为DEFAULT状态</span></span><br><span class="line">&lt;IN_JAVADOC_COMMENT&gt;</span><br><span class="line">TOKEN : &#123;&lt;ENDDOC: <span class="string">"*/"</span>&gt;: DEFAULT &#125;</span><br><span class="line"></span><br><span class="line">-----------------------------------------</span><br><span class="line"><span class="comment">//`&lt;*&gt;` 表示应用于任何状态。</span></span><br><span class="line">&lt;*&gt; </span><br><span class="line">TOKEN : &#123;</span><br><span class="line">  &lt;#_NUM_CHAR:   ["0"-"9"] &gt; //数字</span><br><span class="line">&#125;</span><br><span class="line">----------------------------------------</span><br><span class="line"><span class="comment">//SwitchTo 与</span></span><br><span class="line">&lt;STARTDOC : <span class="string">"/**"</span> &gt;  &#123;SwitchTo(IN_JAVADOC_COMMENT);&#125;</span><br><span class="line">----------------------------------------</span><br><span class="line"><span class="comment">//此处之所以向前看两个符号，就是当看到&lt;TERM&gt;的时候，不知道它是一个field，还是一个term，当&lt;TERM&gt;&lt;COLON&gt;在一起的时候，说明&lt;TERM&gt;代表一个field, 否则代表一个term</span></span><br><span class="line">[</span><br><span class="line">  LOOKAHEAD(<span class="number">2</span>)</span><br><span class="line">  (</span><br><span class="line">    fieldToken=&lt;TERM&gt; &lt;COLON&gt; &#123;field=discardEscapeChar(fieldToken.image);&#125;</span><br><span class="line">    | &lt;STAR&gt; &lt;COLON&gt; &#123;field=<span class="string">"*"</span>;&#125;</span><br><span class="line">  )</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>语法分析<br>语法分析过程中，读入的是词法分析器返回的记号，返回的是规则(rule)，这些规则是语义分析所需要的，在语法分析中，一般会使用BNF来表示规则，比如赋值语句是一个合法的语句，则在此处需要定义关于语法的BNF：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">assignment ::= INT VAR EQ NUMBER END</span><br><span class="line">INT ::= &quot;int&quot;</span><br><span class="line">VAR ::= [a-zA-Z_][a-zA-Z0-9_]*</span><br><span class="line">EQ = &quot;=&quot;</span><br><span class="line">NUMBER ::= [0-9][0-9]*</span><br><span class="line">END ::= &quot;;&quot;</span><br></pre></td></tr></table></figure>
+<p>就是说，如果读入了这样一个记号的序列：INT VAR EQ NUMBER END,则这个序列被识别成一个赋值的语句，但是，这个还是一个简单的规则，对于这个语句的意思还是不明确的，也就是说，虽然它可以认识所有的赋值语句，但是没有意义，意义的定义在语义分析部分。</p>
+</li>
+<li><p>语义分析<br>在语义分析中，我们需要对在语法分析过程中得出的规则进行解释，比如赋值语句，我们需要将起翻译成：将NUMBER这个记号中的‘值’赋给名叫VAR的一个INT型变量。这个过程完成实际的语法解析，使得语言本身对外有意义。语义分析是脚本型的语言的最高级形式，即脚本解析到此为止将被转换成实际的语言内容并交付给宿主语言编译器进行编译并执行。又或者语义分析发现了一个语法分析过程中规约出来的四则运算表达式，那么它会根据语法中的规则对这个表达式进行求值，计算出最终结果来。</p>
+</li>
+<li><p>扩展语法分析器<br>在上面的例子中的start函数中，我们仅仅通过语法分析器来判断输入的语句是否正确。<br>我们可以扩展BNF表达式，加入Java代码，使得经过语法分析后，得到我们想要的结果或者对象。<br>我们将start函数改写为：<br><img src="/assets/blogImages/javacc/20140511134849812.png" width="50%" height="20%"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">start</span><span class="params">()</span> <span class="keyword">throws</span> NumberFormatException :</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="comment">//start函数中有三个变量</span></span><br><span class="line"></span><br><span class="line">  Token t ;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">int</span> i ;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">int</span> value ;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">  <span class="comment">//首先要求表达式的第一个一定是一个NUMBER，并把其值付给t</span></span><br><span class="line"></span><br><span class="line">  t= &lt;NUMBER&gt;</span><br><span class="line"></span><br><span class="line">  <span class="comment">//将t的值取出来，解析为整型，放入变量i中</span></span><br><span class="line"></span><br><span class="line">  &#123; i = Integer.parseInt( t.image ) ; &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">//最后的结果value设为i</span></span><br><span class="line"></span><br><span class="line">  &#123; value = i ; &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">//紧接着应该是零个或者多个PLUS和NUMBER的组合</span></span><br><span class="line"></span><br><span class="line">  (</span><br><span class="line"></span><br><span class="line">    &lt;PLUS&gt;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//每出现一个NUMBER，都将其付给t，并将t的值解析为整型，付给i</span></span><br><span class="line"></span><br><span class="line">    t= &lt;NUMBER&gt;</span><br><span class="line"></span><br><span class="line">    &#123; i = Integer.parseInt( t.image ) ; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//将i加到value上</span></span><br><span class="line"></span><br><span class="line">    &#123; value += i ; &#125;</span><br><span class="line"></span><br><span class="line">  )*</span><br><span class="line"></span><br><span class="line">  <span class="comment">//最后的value就是表达式的和</span></span><br><span class="line"></span><br><span class="line">  &#123; <span class="keyword">return</span> value ; &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>其它：<br><code>#AddNode(2)</code>确定节点由特定数量的子节点构成，有几个子节点。<br><code>t.kind</code>表示单词的类别，<code>t.image</code>表示单词值。</p>
+<p>参考资料:<br><a href="https://abruzzi.iteye.com/blog/672299" target="_blank" rel="noopener">https://abruzzi.iteye.com/blog/672299</a><br><a href="https://blog.csdn.net/jediael_lu/article/details/34434519" target="_blank" rel="noopener">https://blog.csdn.net/jediael_lu/article/details/34434519</a><br><a href="https://my.oschina.net/qiangzigege/blog/862120" target="_blank" rel="noopener">https://my.oschina.net/qiangzigege/blog/862120</a></p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>又有鸡腿吃了<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">前端</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Sublime Text</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">javacc</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">快捷键</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">IDE</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">编译原理</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://ljingxiong.github.io/2019/05/16/编译原理与javacc/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2019/05/16/JavaCC简介/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">JavaCC简介</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -242,9 +374,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,

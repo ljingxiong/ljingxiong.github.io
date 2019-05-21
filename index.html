@@ -154,6 +154,174 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-编译原理与javacc" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/05/16/编译原理与javacc/">编译原理与JavaCC</a>
+    </h1>
+  
+
+        
+        <a href="/2019/05/16/编译原理与javacc/" class="archive-article-date">
+  	<time datetime="2019-05-16T06:40:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-16</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h5 id="编译原理"><a href="#编译原理" class="headerlink" title="编译原理"></a>编译原理</h5><p>一般的编译过程主要包括<code>词法分析</code>、<code>语法分析</code>、<code>语义分析</code>、<code>中间代码生成</code>、<code>代码优化</code>、<code>目标代码生成</code>。<br>其中，<br>(1) <code>词法分析</code>主要任务是输入源程序，对构成源程序的程序进行扫描和分解，识别出一个一个的单词(token)。单词是语言中具有独立意义的最基本结构。一般这些单词包括程序语言所支持的保留字、数据类型、操作符、分隔符以及程序定义的标识符、常量等。<br>(2) <code>语法分析</code>的主要任务是在词法分析的基础上，根据语言的语法规则把单词序列组合成各类语法单位（一般表示成语法树）。<br>(3) <code>语义分析</code>的主要任务是进一步分析语法结构正确的程序是否符合源程序的上下文约束、运算相容性等语义约束规则。<br><img src="/assets/blogImages/javacc/编译一般过程.png" width="30%" height="20%"></p>
+<h5 id="JavaCC-Java-Compiler-Compiler"><a href="#JavaCC-Java-Compiler-Compiler" class="headerlink" title="JavaCC(Java Compiler Compiler)"></a>JavaCC(Java Compiler Compiler)</h5><p>JavaCC是一个词法分析器和语法分析器的生成器。用于java领域，根据指定格式的输入文件生成java源码的词法、语法分析程序（比lex和yacc要人性化）。<br>JavaCC采用的是自顶向下的分析方法，而且没有回溯功能，因此如何解决冲突的问题，是程序员的责任。<br>JavaCC是LL解析器生成器，可处理的语法范围比较狭窄，但支持无限长的token超前扫描。<br>JavaCC本身既不是一个词法分析器，也不是一个语法分析器，而是根据指定的规则生成两者的生成器。</p>
+<blockquote>
+<p>把输入的字符串分解成一个一个的单词，然后把单词序列组合成语法单位，最后依据语言环境所定义的语义约束对这些语法单位进行分析计算。<br>对一个语言的源文件进行解析，主要是做这样几件事：<br>√ 词法分析<br>√ 语法分析<br>√ 语义分析<br><img src="/assets/blogImages/javacc/201611010924241299.png" width="50%" height="20%"></p>
+</blockquote>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">javacc</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">编译原理</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/05/16/编译原理与javacc/">more >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-JavaCC简介" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/05/16/JavaCC简介/">JavaCC简介</a>
+    </h1>
+  
+
+        
+        <a href="/2019/05/16/JavaCC简介/" class="archive-article-date">
+  	<time datetime="2019-05-16T03:00:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-16</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h5 id="语法描述文件"><a href="#语法描述文件" class="headerlink" title="语法描述文件"></a>语法描述文件</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">options &#123;</span><br><span class="line">  JavaCC 的选项 <span class="comment">//执行java -cp javacc.jar javacc查看</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">PARSER_BEGIN(解析器类名)</span><br><span class="line"><span class="keyword">package</span> 包名;</span><br><span class="line"><span class="keyword">import</span> 库名;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> 解析器类名 </span>&#123;</span><br><span class="line">  任意的Java代码</span><br><span class="line">&#125;</span><br><span class="line">PARSER_END (解析器类名)</span><br><span class="line"></span><br><span class="line">扫描器的描述</span><br><span class="line"></span><br><span class="line">解析器的描述</span><br></pre></td></tr></table></figure>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">javacc</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">编译原理</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/05/16/JavaCC简介/">more >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-悟透JavaScript" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -805,173 +973,6 @@
 
 
   
-    <article id="post-ExecutorService和BlockingQueue的小例子" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/06/13/ExecutorService和BlockingQueue的小例子/">ExecutorService和BlockingQueue的小例子</a>
-    </h1>
-  
-
-        
-        <a href="/2018/06/13/ExecutorService和BlockingQueue的小例子/" class="archive-article-date">
-  	<time datetime="2018-06-13T03:41:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-13</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>需求，学校组织学生自愿验血，来了三个医生，抽血速度依次为1000,2000，3000毫秒。</p>
-<p>抽血屋子较小，最多能容纳9个学生，即排队，每个医生最多排3个人。</p>
-<p>如果来的学生看到屋子满了，就离开，不验了。<br>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">线程池</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">队列</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">线程池+队列</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/06/13/ExecutorService和BlockingQueue的小例子/">more >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-RSA加密解密及加签验签" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/06/07/RSA加密解密及加签验签/">RSA加密解密及加签验签</a>
-    </h1>
-  
-
-        
-        <a href="/2018/06/07/RSA加密解密及加签验签/" class="archive-article-date">
-  	<time datetime="2018-06-07T04:55:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-07</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h5 id="1-RSA安全性应用场景说明"><a href="#1-RSA安全性应用场景说明" class="headerlink" title="1.RSA安全性应用场景说明"></a>1.RSA安全性应用场景说明</h5><p>　　在刚接触RSA的时候，会混淆RSA加密解密和RSA加签验签的概念。简单来说加密解密是公钥加密私钥解密，持有公钥（多人持有）可以对数据加密，但是只有持有私钥（一人持有）才可以解密并查看数据；加签验签是私钥加签公钥验签，持有私钥（一人持有）可以加签，持有公钥（多人持有）可以验签。</p>
-<p>　　在金融行业在设计到数据交互传输的时候，需要考虑数据的安全性问题。下文通过介绍RSA的加密和加签两个特性，说明RSA加密技术在保障数据传输过程中的安全性以及实现数据的防篡改和防否机制的应用场景及代码实现。<br>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">RSA</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">安全性</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/06/07/RSA加密解密及加签验签/">more >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -986,7 +987,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2018 渭水飞熊
+    		&copy; 2019 渭水飞熊
     	</div>
       	<div class="footer-right">
 			<!--
@@ -1072,15 +1073,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Comparator</a>
+                <a href="javascript:void(0)" class="js-tag color3">前端</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Comparable</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">升序降序</a>
+                <a href="javascript:void(0)" class="js-tag color4">CSS</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1096,6 +1093,14 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">RSA</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">安全性</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Sublime Text</a>
               </li>
              
@@ -1104,27 +1109,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">前端</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">IDE</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">CSS</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">开篇</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">RSA</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">安全性</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1149,6 +1134,34 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">架构</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">javacc</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">编译原理</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">开篇</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Comparator</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Comparable</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">升序降序</a>
               </li>
             
             <div class="clearfix"></div>
