@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="渭水飞熊の博客">
 <meta property="og:description" content="语法描述文件12345678910111213141516options &amp;#123;  JavaCC 的选项 //执行java -cp javacc.jar javacc查看&amp;#125;PARSER_BEGIN(解析器类名)package 包名;import 库名;public class 解析器类名 &amp;#123;  任意的Java代码&amp;#125;PARSER_END (解析器类名)扫描器的描述">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-05-21T02:27:18.957Z">
+<meta property="og:updated_time" content="2019-05-21T05:49:33.070Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaCC简介">
 <meta name="twitter:description" content="语法描述文件12345678910111213141516options &amp;#123;  JavaCC 的选项 //执行java -cp javacc.jar javacc查看&amp;#125;PARSER_BEGIN(解析器类名)package 包名;import 库名;public class 解析器类名 &amp;#123;  任意的Java代码&amp;#125;PARSER_END (解析器类名)扫描器的描述">
@@ -198,6 +198,11 @@
 <p>14.EXTENSIVE DEBUGGING CAPABILITIES：使用选项DEBUG_PARSER, DEBUG_LOOKAHEAD, 和 DEBUG_TOKEN_MANAGER，使用者可以在语法分析和Token处理中使用深层次的分析。</p>
 <p>15.SPECIAL TOKENS：Tokens可以在词法说明中被定义成特殊的Tokens从而在语法分析的过程中被忽略，但这些Tokens可以通过工具进行处理。</p>
 <p>16.VERY GOOD ERROR REPORTING：JavaCC的错误提示在众多语法分析生成器中是最好的。JavaCC产生的语法分析器可以清楚的指出语法分析的错误并提供完整的诊断信息。</p>
+<h5 id="Antlr4"><a href="#Antlr4" class="headerlink" title="Antlr4"></a>Antlr4</h5><p>在工作中遇到了需要对一个表达式进行解析。。。。。。<br>Antlr 4是一个非常优秀的词法语法分析工具，借助它你可以实现很多自定义表达式解析，甚至可以做一个简单的编译器。Antlr 4使用了Visitor模式和Listener模式来帮助使用者对解析好的表达式进行处理。</p>
+<p>Visitor模式即Antlr 4已经将表达式按照你给的规则解析成为一个语法树。然后把语法树的根节点交给你，你去决定该往哪走。</p>
+<p>Listener模式即Antlr 4已经将表达式按照你给的规则解析成为一个语法树。然后自己执行深度优先遍历，然后在遍历到每个节点的时候给你发送事件。</p>
+<p>为了简单起见，我们将解析分为两个阶段，对应我们的大脑读取文字时的过程。当我们读到一个句子时，在第一阶段，大脑会下意识地将字符组成单词，然后像查词典一样识别出它们的意思。在第二阶段，大脑会根据已识别的单词去识别句子的结构。第一阶段的过程叫词法分析（lexical analysis），对应的分析程序叫做lexer，负责将符号（token）分组成符号类（token class or token type）。而第二阶段就是真正的parser，默认ANTLR会构建出一棵分析树（parse tree）或叫语法树（syntax tree）。如下图，就是简单的赋值表达式的解析过程：</p>
+<p>[转载]：<a href="https://blog.csdn.net/dc_726/article/details/45399371" target="_blank" rel="noopener">https://blog.csdn.net/dc_726/article/details/45399371</a> </p>
 
       
 
@@ -450,11 +455,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">前端</a>
+                <a href="javascript:void(0)" class="js-tag color1">Comparator</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">CSS</a>
+                <a href="javascript:void(0)" class="js-tag color1">Comparable</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">升序降序</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -467,6 +476,30 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">线程池+队列</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">开篇</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">javacc</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">编译原理</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">前端</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">mvvm</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -490,10 +523,6 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">mvvm</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Vue.js</a>
               </li>
              
@@ -506,39 +535,15 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">CSS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">秒杀</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">架构</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">java</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">javacc</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">编译原理</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">开篇</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Comparator</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Comparable</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">升序降序</a>
               </li>
             
             <div class="clearfix"></div>
