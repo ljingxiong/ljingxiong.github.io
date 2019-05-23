@@ -185,43 +185,7 @@
 <li>Object.notifyAll()：唤醒当前对象阻塞队列里的所有线程</li>
 </ul>
 </blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WaitNotifyCase</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">final</span> Object lock = <span class="keyword">new</span> Object();</span><br><span class="line"> </span><br><span class="line">        <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                System.out.println(<span class="string">"thread A is waiting to get lock"</span>);</span><br><span class="line">                <span class="keyword">synchronized</span> (lock) &#123; <span class="comment">//lock........</span></span><br><span class="line">                    <span class="keyword">try</span> &#123;</span><br><span class="line">                        System.out.println(<span class="string">"thread A get lock"</span>);</span><br><span class="line">                        TimeUnit.SECONDS.sleep(<span class="number">1</span>);</span><br><span class="line">                        System.out.println(<span class="string">"thread A do wait method"</span>);</span><br><span class="line">                        lock.wait(); <span class="comment">//lock........</span></span><br><span class="line">                        System.out.println(<span class="string">"wait end"</span>);</span><br><span class="line">                    &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                        e.printStackTrace();</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;).start();</span><br><span class="line"> </span><br><span class="line">        <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                System.out.println(<span class="string">"thread B is waiting to get lock"</span>);</span><br><span class="line">                <span class="keyword">synchronized</span> (lock) &#123; <span class="comment">//lock........</span></span><br><span class="line">                    System.out.println(<span class="string">"thread B get lock"</span>);</span><br><span class="line">                    <span class="keyword">try</span> &#123;</span><br><span class="line">                        TimeUnit.SECONDS.sleep(<span class="number">5</span>);</span><br><span class="line">                    &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                        e.printStackTrace();</span><br><span class="line">                    &#125;</span><br><span class="line">                    lock.notify(); <span class="comment">//lock........notify方法会选择wait set中任意一个线程进行唤醒</span></span><br><span class="line">                    System.out.println(<span class="string">"thread B do notify method"</span>);<span class="comment">//notify后，并未释放锁，要等到synchronized里的代码执行完成后再释放</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;).start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">执行结果：</span><br><span class="line">thread A is waiting to get lock</span><br><span class="line">thread A get lock</span><br><span class="line">thread B is waiting to get lock</span><br><span class="line">thread A <span class="keyword">do</span> wait method</span><br><span class="line">thread B get lock</span><br><span class="line">thread B <span class="keyword">do</span> notify method</span><br><span class="line">wait end</span><br></pre></td></tr></table></figure>
-<ol>
-<li>必须由synchronized锁住的那个对象来调用wait、notify方法。</li>
-<li>当线程A执行wait方法时，该线程会被挂起；</li>
-<li>当线程B执行notify方法时，会唤醒被挂起的线程A；(JDK注释：notify方法会选择wait set中任意一个线程进行唤醒)</li>
-</ol>
-<h5 id="上述代码中，存在多个疑问"><a href="#上述代码中，存在多个疑问" class="headerlink" title="上述代码中，存在多个疑问"></a>上述代码中，存在多个疑问</h5><ul>
-<li><p><strong>lock对象、线程A和线程B三者是一种什么关系？</strong><br>答：上面的结论，可以想象一个场景：<br>1、lock对象维护了一个等待队列list；<br>2、线程A中执行lock的wait方法，把线程A保存到list中；<br>3、线程B中执行lock的notify方法，从等待队列中取出线程A继续执行；<br>—-当然了，Hotspot实现不可能这么简单。</p>
-</li>
-<li><p><strong>为什么这三个方法要与synchronized一起使用呢？</strong><br>答：我们先要了解几个知识点<br>(1)每一个对象都有一个与之对应的监视器<br>(2)每一个监视器里面都有一个该对象的锁和一个等待队列和一个同步队列<br>  A: wait()方法的语义有两个，一是<code>释放当前对象锁</code>，另一个是<code>进入阻塞队列</code>，可以看到，这些操作都是与监视器相关的，当然要指定一个监视器才能完成这个操作了<br>  B: notify()方法也是一样的，用来唤醒一个线程，你要去唤醒，首先你得知道他在哪儿，所以必须先找到该对象，也就是获取该对象的锁，当获取到该对象的锁之后，才能去该对象的对应的等待队列去唤醒一个线程。<strong>值得注意的是，只有当执行唤醒工作的线程离开同步块，即释放锁之后，被唤醒线程才能去竞争锁</strong>。<br>  C: notifyAll()方法和notify()一样，只不过是唤醒等待队列中的所有线程</p>
-<p>  因wait()而导致阻塞的线程是放在阻塞队列中的，因竞争失败导致的阻塞是放在同步队列中的，notify()/notifyAll()实质上是把阻塞队列中的线程放到同步队列中去<br>  值得提的一点是，synchronized是一个非公平的锁，如果竞争激烈的话，可能导致某些线程一直得不到执行。</p>
-</li>
-</ul>
-<ul>
-<li><p><strong>为什么wait()必须在同步（Synchronized）方法/代码块中调用？</strong><br>答：调用wait()就是释放锁，释放锁的前提是必须要先获得锁，先获得锁才能释放锁。</p>
-</li>
-<li><p><strong>为什么notify(),notifyAll()必须在同步（Synchronized）方法/代码块中调用？</strong><br>答：notify(),notifyAll()是将锁交给含有wait()方法的线程，让其继续执行下去，如果自身没有锁，怎么叫把锁交给其他线程呢；（本质是让处于入口队列的线程竞争锁）</p>
-</li>
-<li><p><strong>那么wait set的线程什么时候会被唤醒？</strong><br>答：执行notify/notifyAll方法。<br>  执行完notify方法，并不会立马唤醒等待线程，在notify方法后面加一段sleep代码就可以看到效果，如果线程B执行完notify方法之后sleep 5s，在这段时间内，线程B依旧持有monitor，线程A只能继续等待；<code>从JVM的方法实现中，可以发现：</code>notify和notifyAll并不会释放所占有的ObjectMonitor对象，其实真正释放ObjectMonitor对象的时间点是在执行monitorexit指令，一旦释放ObjectMonitor对象了，entry set中ObjectWaiter节点所保存的线程就可以开始竞争ObjectMonitor对象进行加锁操作了。</p>
-</li>
-<li><p><strong>线程A获取了synchronized锁，执行wait方法并挂起，线程B又如何再次获取锁？</strong><br>答：因wait()而导致阻塞的线程是放在阻塞队列中的，因竞争失败导致的阻塞是放在同步队列中的，notify()/notifyAll()实质上是把阻塞队列中的线程放到同步队列中去,再次争夺锁</p>
-</li>
-</ul>
-<p>在线程A的wait方法释放锁，到线程B获取锁，这期间发生了什么？线程B是如何知道线程A已经释放了锁？好迷茫….</p>
-<hr>
-<h5 id="如何使用Wait"><a href="#如何使用Wait" class="headerlink" title="如何使用Wait"></a>如何使用Wait</h5><p><strong>第一个问题是</strong>，我们怎么在代码里使用wait()呢？因为wait()并不是Thread类下的函数，我们并不能使用Thread.call()。事实上很多Java程序员都喜欢这么写，因为它们习惯了使用Thread.sleep()，所以他们会试图使用wait() 来达成相同的目的，但很快他们就会发现这并不能顺利解决问题。</p>
-<blockquote>
-<p>正确的方法是对在多线程间共享的那个Object来使用wait。在生产者消费者问题中，这个共享的Object就是那个缓冲区队列。</p>
-</blockquote>
-<p><strong>第二个问题是</strong>，既然我们应该在synchronized的函数或是对象里调用wait，那哪个对象应该被synchronized呢？</p>
-<h5 id="永远在循环（loop）里调用-wait-和-notify，不是在-If-语句"><a href="#永远在循环（loop）里调用-wait-和-notify，不是在-If-语句" class="headerlink" title="永远在循环（loop）里调用 wait 和 notify，不是在 If 语句"></a>永远在循环（loop）里调用 wait 和 notify，不是在 If 语句</h5><p>现在你知道wait应该永远在被synchronized的背景下和那个被多线程共享的对象上调用，下一个一定要记住的问题就是，你应该永远在while循环，而不是if语句中调用wait。因为线程是在某些条件下等待的——在我们的例子里，即“如果缓冲区队列是满的话，那么生产者线程应该等待”，你可能直觉就会写一个if语句。但if语句存在一些微妙的小问题，导致即使条件没被满足，你的线程你也有可能被错误地唤醒。所以如果你不在线程被唤醒后再次使用while循环检查唤醒条件是否被满足，你的程序就有可能会出错——例如在缓冲区为满的时候生产者继续生成数据，或者缓冲区为空的时候消费者开始小号数据。所以记住，永远在while循环而不是if语句中使用wait！我会推荐阅读《Effective Java》，这是关于如何正确使用wait和notify的最好的参考资料。<br><img src="/assets/blogImages/object-wait-notify/5fda7f863416140cb97a8c8977dfd5db.png" width="20%" height="20%"><br>基于以上认知，下面这个是使用wait和notify函数的规范代码模板：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// The standard idiom for calling the wait method in Java </span></span><br><span class="line"><span class="keyword">synchronized</span> (sharedObject) &#123; </span><br><span class="line">    <span class="keyword">while</span> (condition) &#123; </span><br><span class="line">    sharedObject.wait(); </span><br><span class="line">        <span class="comment">// (Releases lock, and reacquires on wakeup) </span></span><br><span class="line">    &#125; </span><br><span class="line">    <span class="comment">// do action based upon condition e.g. take or put into queue </span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>就像我之前说的一样，在while循环里使用wait的目的，是在线程被唤醒的前后都持续检查条件是否被满足。如果条件并未改变，wait被调用之前notify的唤醒通知就来了，那么这个线程并不能保证被唤醒，有可能会导致死锁问题。</p>
-<h4 id="划重点"><a href="#划重点" class="headerlink" title="划重点"></a>划重点</h4><font face="微软雅黑" color="red" size="3">1. 你可以使用wait和notify函数来实现线程间通信。你可以用它们来实现多线程（&gt;3）之间的通信。<br>2. 永远在synchronized的函数或对象里使用wait、notify和notifyAll，不然Java虚拟机会生成 IllegalMonitorStateException。<br>3. 永远在while循环里而不是if语句下使用wait。这样，循环会在线程<code>睡眠前后都检查wait的条件</code>，并在条件实际上并未改变的情况下处理唤醒通知。<br>4. 永远在多线程间共享的对象（在生产者消费者模型里即缓冲区队列）上使用wait。<br>5. 基于前文提及的理由，更倾向用 notifyAll()，而不是 notify()。<br></font>
-
-<p>参考资料:<br>1.<a href="https://www.jianshu.com/p/f4454164c017" target="_blank" rel="noopener">占小狼</a><br>2.<a href="https://blog.csdn.net/qq_42029989/article/details/89709692" target="_blank" rel="noopener">https://blog.csdn.net/qq_42029989/article/details/89709692</a><br>3.<a href="http://www.importnew.com/16453.html" target="_blank" rel="noopener">http://www.importnew.com/16453.html</a></p>
-
+        
       
 
       
@@ -1118,6 +1082,14 @@
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">前端</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">CSS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Java</a>
               </li>
              
@@ -1138,15 +1110,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">线程池</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">队列</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">线程池+队列</a>
+                <a href="javascript:void(0)" class="js-tag color5">mvvm</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1162,11 +1126,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">前端</a>
+                <a href="javascript:void(0)" class="js-tag color2">Thread</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">mvvm</a>
+                <a href="javascript:void(0)" class="js-tag color3">线程</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1178,11 +1142,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Thread</a>
+                <a href="javascript:void(0)" class="js-tag color4">线程池</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">线程</a>
+                <a href="javascript:void(0)" class="js-tag color3">队列</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">线程池+队列</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1207,10 +1175,6 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">CSS</a>
               </li>
              
               <li class="article-tag-list-item">
