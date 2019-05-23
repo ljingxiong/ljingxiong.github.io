@@ -218,13 +218,8 @@
 <h5 id="永远在循环（loop）里调用-wait-和-notify，不是在-If-语句"><a href="#永远在循环（loop）里调用-wait-和-notify，不是在-If-语句" class="headerlink" title="永远在循环（loop）里调用 wait 和 notify，不是在 If 语句"></a>永远在循环（loop）里调用 wait 和 notify，不是在 If 语句</h5><p>现在你知道wait应该永远在被synchronized的背景下和那个被多线程共享的对象上调用，下一个一定要记住的问题就是，你应该永远在while循环，而不是if语句中调用wait。因为线程是在某些条件下等待的——在我们的例子里，即“如果缓冲区队列是满的话，那么生产者线程应该等待”，你可能直觉就会写一个if语句。但if语句存在一些微妙的小问题，导致即使条件没被满足，你的线程你也有可能被错误地唤醒。所以如果你不在线程被唤醒后再次使用while循环检查唤醒条件是否被满足，你的程序就有可能会出错——例如在缓冲区为满的时候生产者继续生成数据，或者缓冲区为空的时候消费者开始小号数据。所以记住，永远在while循环而不是if语句中使用wait！我会推荐阅读《Effective Java》，这是关于如何正确使用wait和notify的最好的参考资料。<br><img src="/assets/blogImages/object-wait-notify/5fda7f863416140cb97a8c8977dfd5db.png" width="20%" height="20%"><br>基于以上认知，下面这个是使用wait和notify函数的规范代码模板：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// The standard idiom for calling the wait method in Java </span></span><br><span class="line"><span class="keyword">synchronized</span> (sharedObject) &#123; </span><br><span class="line">    <span class="keyword">while</span> (condition) &#123; </span><br><span class="line">    sharedObject.wait(); </span><br><span class="line">        <span class="comment">// (Releases lock, and reacquires on wakeup) </span></span><br><span class="line">    &#125; </span><br><span class="line">    <span class="comment">// do action based upon condition e.g. take or put into queue </span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>就像我之前说的一样，在while循环里使用wait的目的，是在线程被唤醒的前后都持续检查条件是否被满足。如果条件并未改变，wait被调用之前notify的唤醒通知就来了，那么这个线程并不能保证被唤醒，有可能会导致死锁问题。</p>
-<h4 id="划重点"><a href="#划重点" class="headerlink" title="划重点"></a>划重点</h4><ol>
-<li>你可以使用wait和notify函数来实现线程间通信。你可以用它们来实现多线程（&gt;3）之间的通信。</li>
-<li>永远在synchronized的函数或对象里使用wait、notify和notifyAll，不然Java虚拟机会生成 IllegalMonitorStateException。</li>
-<li>永远在while循环里而不是if语句下使用wait。这样，循环会在线程<code>睡眠前后都检查wait的条件</code>，并在条件实际上并未改变的情况下处理唤醒通知。</li>
-<li>永远在多线程间共享的对象（在生产者消费者模型里即缓冲区队列）上使用wait。</li>
-<li>基于前文提及的理由，更倾向用 notifyAll()，而不是 notify()。</li>
-</ol>
+<h4 id="划重点"><a href="#划重点" class="headerlink" title="划重点"></a>划重点</h4><font face="微软雅黑" color="red" size="3">1. 你可以使用wait和notify函数来实现线程间通信。你可以用它们来实现多线程（&gt;3）之间的通信。<br>2. 永远在synchronized的函数或对象里使用wait、notify和notifyAll，不然Java虚拟机会生成 IllegalMonitorStateException。<br>3. 永远在while循环里而不是if语句下使用wait。这样，循环会在线程<code>睡眠前后都检查wait的条件</code>，并在条件实际上并未改变的情况下处理唤醒通知。<br>4. 永远在多线程间共享的对象（在生产者消费者模型里即缓冲区队列）上使用wait。<br>5. 基于前文提及的理由，更倾向用 notifyAll()，而不是 notify()。<br></font>
+
 <p>参考资料:<br>1.<a href="https://www.jianshu.com/p/f4454164c017" target="_blank" rel="noopener">占小狼</a><br>2.<a href="https://blog.csdn.net/qq_42029989/article/details/89709692" target="_blank" rel="noopener">https://blog.csdn.net/qq_42029989/article/details/89709692</a><br>3.<a href="http://www.importnew.com/16453.html" target="_blank" rel="noopener">http://www.importnew.com/16453.html</a></p>
 
       
@@ -1127,14 +1122,6 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">前端</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">CSS</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Comparator</a>
               </li>
              
@@ -1144,6 +1131,10 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">升序降序</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">开篇</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1159,10 +1150,6 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">开篇</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">java</a>
               </li>
              
@@ -1175,15 +1162,11 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">前端</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">mvvm</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Thread</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">线程</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1192,6 +1175,14 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">安全性</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Thread</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">线程</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1216,6 +1207,10 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">CSS</a>
               </li>
              
               <li class="article-tag-list-item">
