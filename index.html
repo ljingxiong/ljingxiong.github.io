@@ -176,64 +176,8 @@
       
         <h5 id="Java中的ThreadPoolExecutor类"><a href="#Java中的ThreadPoolExecutor类" class="headerlink" title="Java中的ThreadPoolExecutor类"></a>Java中的ThreadPoolExecutor类</h5><p>java.uitl.concurrent.ThreadPoolExecutor类是线程池中最核心的一个类，因此如果要透彻地了解Java中的线程池，必须先了解这个类。</p>
 <ul>
-<li><strong>corePoolSize</strong><br>  核心池的大小，这个参数跟后面讲述的线程池的实现原理有非常大的关系。在创建了线程池后，默认情况下，线程池中并没有任何线程，而是等待有任务到来才创建线程去执行任务，除非调用了prestartAllCoreThreads()或者prestartCoreThread()方法，从这2个方法的名字就可以看出，是预创建线程的意思，即在没有任务到来之前就创建corePoolSize个线程或者一个线程。默认情况下，在创建了线程池后，线程池中的线程数为0，当有任务来之后，就会创建一个线程去执行任务，当线程池中的线程数目达到corePoolSize后，就会把到达的任务放到缓存队列当中；</li>
-<li><strong>maximumPoolSize</strong><br>  线程池最大线程数，这个参数也是一个非常重要的参数，它表示在线程池中最多能创建多少个线程；</li>
-<li><strong>keepAliveTime</strong><br>  表示线程没有任务执行时最多保持多久时间会终止。默认情况下，只有当线程池中的线程数大于corePoolSize时，keepAliveTime才会起作用，直到线程池中的线程数不大于corePoolSize，即当线程池中的线程数大于corePoolSize时，如果一个线程空闲的时间达到keepAliveTime，则会终止，直到线程池中的线程数不超过corePoolSize。但是如果调用了allowCoreThreadTimeOut(boolean)方法，在线程池中的线程数不大于corePoolSize时，keepAliveTime参数也会起作用，直到线程池中的线程数为0；</li>
-<li><p><strong>unit</strong><br>  参数keepAliveTime的时间单位，有7种取值，在TimeUnit类中有7种静态属性：</p>
-  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">TimeUnit.DAYS;               <span class="comment">//天</span></span><br><span class="line">TimeUnit.HOURS;             <span class="comment">//小时</span></span><br><span class="line">TimeUnit.MINUTES;           <span class="comment">//分钟</span></span><br><span class="line">TimeUnit.SECONDS;           <span class="comment">//秒</span></span><br><span class="line">TimeUnit.MILLISECONDS;      <span class="comment">//毫秒</span></span><br><span class="line">TimeUnit.MICROSECONDS;      <span class="comment">//微妙</span></span><br><span class="line">TimeUnit.NANOSECONDS;       <span class="comment">//纳秒</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p><strong>workQueue</strong>任务缓存队列及排队策略<br>  workQueue的类型为BlockingQueue&lt;Runnable><br>  一个阻塞队列，用来存储等待执行的任务，这个参数的选择也很重要，会对线程池的运行过程产生重大影响，一般来说，线程池的三种缓存队列有以下几种选择：</p>
-</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">队列</th>
-<th style="text-align:left">简单解释</th>
-<th style="text-align:left">创建线程数</th>
-<th style="text-align:left">正在可以去有执行意愿(放入到缓存队列和执行线程中)的最多任务数</th>
-<th style="text-align:left">可以缓存个数</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">SynchrousQueue</td>
-<td style="text-align:left">不会保存提交任务，超出直接corePoolSize个任务，直接创建新的线程来执行任务，直到(corePoolSize＋新建线程)&gt; maximumPoolSize。不是核心线程就是新建线程。</td>
-<td style="text-align:left">maximumPoolSize</td>
-<td style="text-align:left">(corePoolSize+创建的线程数) &lt;=maximumPoolSize</td>
-<td style="text-align:left">无</td>
-</tr>
-<tr>
-<td style="text-align:left">LinkedBlockingQueue</td>
-<td style="text-align:left">基于链表的先进先出，无界队列。超出直接corePoolSize个任务，则加入到该队列中，直到资源耗尽,所以maximumPoolSize不起作用</td>
-<td style="text-align:left">maximumPoolSize</td>
-<td style="text-align:left">(corePoolSize+创建的线程数)(相加数要&lt;=maximumPoolSize)+ArrayBlockingQueue设置的缓存数</td>
-<td style="text-align:left">ArrayBlockingQueue设置的缓存数</td>
-</tr>
-<tr>
-<td style="text-align:left">ArrayBlockingQueue</td>
-<td style="text-align:left">基于数组的先进先出，创建时必须指定大小，超出直接corePoolSize个任务，则加入到该队列中，只能加该queue设置的大小，其余的任务则创建线程，直到(corePoolSize＋新建线程)&gt; maximumPoolSize 。</td>
-<td style="text-align:left">corePoolSize</td>
-<td style="text-align:left">corePoolSize＋LinkedBlockingQueue缓存的无界任务</td>
-<td style="text-align:left">无界</td>
-</tr>
-</tbody>
-</table>
-<ul>
-<li><p><strong>threadFactory</strong><br>  线程工厂，主要用来创建线程；</p>
-</li>
-<li><p><strong>handler</strong> 任务拒绝策略<br>  表示当拒绝处理任务时的策略，有以下四种取值：</p>
-  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ThreadPoolExecutor.AbortPolicy:丢弃任务并抛出RejectedExecutionException异常。 </span><br><span class="line">ThreadPoolExecutor.DiscardPolicy：也是丢弃任务，但是不抛出异常。 </span><br><span class="line">ThreadPoolExecutor.DiscardOldestPolicy：丢弃队列最前面的任务，然后重新尝试执行任务（重复此过程）</span><br><span class="line">ThreadPoolExecutor.CallerRunsPolicy：由调用线程处理该任务</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h6 id="在ThreadPoolExecutor类中有几个非常重要的方法"><a href="#在ThreadPoolExecutor类中有几个非常重要的方法" class="headerlink" title="在ThreadPoolExecutor类中有几个非常重要的方法"></a>在ThreadPoolExecutor类中有几个非常重要的方法</h6><ul>
-<li>execute()<br>  execute()方法实际上是Executor中声明的方法，在ThreadPoolExecutor进行了具体的实现，这个方法是ThreadPoolExecutor的核心方法，通过这个方法可以向线程池提交一个任务，交由线程池去执行。</li>
-<li>submit()<br>  submit()方法是在ExecutorService中声明的方法，在AbstractExecutorService就已经有了具体的实现，在ThreadPoolExecutor中并没有对其进行重写，这个方法也是用来向线程池提交任务的，但是它和execute()方法不同，它能够返回任务执行的结果，去看submit()方法的实现，会发现它实际上还是调用的execute()方法，只不过它利用了Future来获取任务执行结果</li>
-<li>shutdown()<br>  不会立即终止线程池，而是要等所有任务缓存队列中的任务都执行完后才终止，但再也不会接受新的任务</li>
-<li>shutdownNow()<br>  立即终止线程池，并尝试打断正在执行的任务，并且清空任务缓存队列，返回尚未执行的任务</li>
-<li>setCorePoolSize()/setMaximumPoolSize()<br>  线程池容量的动态调整</li>
-</ul>
-
+<li><p><strong>corePoolSize</strong><br>  核心池的大小，这个参数跟后面讲述的线程池的实现原理有非常大的关系。在创建了线程池后，默认情况下，线程池中并没有任何线程，而是等待有任务到来才创建线程去执行任务，除非调用了prestartAllCoreThreads()或者prestartCoreThread()方法，从这2个方法的名字就可以看出，是预创建线程的意思，即在没有任务到来之前就创建corePoolSize个线程或者一个线程。默认情况下，在创建了线程池后，线程池中的线程数为0，当有任务来之后，就会创建一个线程去执行任务，当线程池中的线程数目达到corePoolSize后，就会把到达的任务放到缓存队列当中；</p>
+        
       
 
       
@@ -1151,39 +1095,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">线程池</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">队列</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">线程池+队列</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">前端</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">CSS</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">开篇</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">java</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">javacc</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">编译原理</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1196,6 +1112,22 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">升序降序</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">线程池</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">队列</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">线程池+队列</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">开篇</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1243,15 +1175,27 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Java Thread</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">秒杀</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">架构</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">javacc</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">编译原理</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Java Thread</a>
               </li>
             
             <div class="clearfix"></div>
