@@ -154,6 +154,99 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-java并发杂谈" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/05/29/java并发杂谈/">java并发杂谈</a>
+    </h1>
+  
+
+        
+        <a href="/2019/05/29/java并发杂谈/" class="archive-article-date">
+  	<time datetime="2019-05-29T09:20:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-29</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h5 id="Thread"><a href="#Thread" class="headerlink" title="Thread"></a>Thread</h5><p>(1)线程是程序执行(CPU)的最小单位，而进程是操作系统分配资源的最小单位；</p>
+<p>(2)cpu架构调优，则需要 jvm参数配置</p>
+<p>(3)window: cmd-&gt;wmic</p>
+<pre><code>- cpu:  cup get *
+- 内存：memorychip
+</code></pre><h5 id="Lock"><a href="#Lock" class="headerlink" title="Lock"></a>Lock</h5><p>object -&gt;  wait/notify/notifyAll  需要与synchronized配合使用<br>condition-&gt; await/signal/singalAll 需要与lock配合使用,底层使用的是locksupport<br>locksupport-&gt;park/unpark   解决wait,notify顺序问题</p>
+<p>synchronized是获取对象的内部锁，所以是原生语法层面的互斥，需要JVM实现。<br>ReentrantLock是jdk1.5开始引入的JUC并发包中的一个类，ReentrantLock基于java代码实现，也就是API层面的互斥。ReentrantLock(synchronized的java版实现，并且提供了更丰富的接口)</p>
+<h5 id="Thread-Pool"><a href="#Thread-Pool" class="headerlink" title="Thread Pool"></a>Thread Pool</h5><p>线程池的好处：<br>消除了频繁创建和销毁线程的系统资源开销；<br>面对过量任务的提交能够平缓劣化。</p>
+<p>T1(创建)+T2（运行）+T3（销毁），节省的是T1+T3的时间</p>
+<h5 id="Concurrent-Control"><a href="#Concurrent-Control" class="headerlink" title="Concurrent Control"></a>Concurrent Control</h5><p>CountDownLatch允许一个或多个线程等待一组事件的产生，而CyclicBarrier用于等待其他线程运行到栅栏位置。<br>CountDownLatch的计数器只能使用一次，而CyclicBarrier的计数器可以使用reset()方法重置，可以使用多次，所以CyclicBarrier能够处理更为复杂的场景<br>Semaphore</p>
+<p>AtomicStampedReference 解决CAS的ABA问题</p>
+<p>##### </p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Java Concurrent</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Java并发</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/05/29/java并发杂谈/">more >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-线程池" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -896,105 +989,6 @@
 
 
   
-    <article id="post-Comparable-Comparator区别-comparator升序降序实现" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/07/Comparable-Comparator区别-comparator升序降序实现/">Comparable Comparator区别 comparator升序降序实现</a>
-    </h1>
-  
-
-        
-        <a href="/2018/08/07/Comparable-Comparator区别-comparator升序降序实现/" class="archive-article-date">
-  	<time datetime="2018-08-07T06:46:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-07</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>一、Comparable与Comparator的区别<br>1) 用 Comparator 是策略模式（strategy design pattern），就是不改变对象自身，而用一个策略对象（strategy object）来改变它的行为。<br>2) Comparable改变对象自身。</p>
-</blockquote>
-<blockquote>
-<p>二、comparator升序降序实现<br>int compare(Object o1, Object o2) 返回一个基本类型的整型 </p>
-</blockquote>
-<ul>
-<li><p>如果要按照升序排序，则o1 小于o2，返回-1（负数），相等返回0，o1大于o2返回1（正数） </p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Comparator comparator = <span class="keyword">new</span> Comparator() &#123; </span><br><span class="line">	<span class="meta">@Override</span> </span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compare</span><span class="params">(Integer x, Integer y)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//方法一</span></span><br><span class="line">        <span class="comment">//  return (x == y) ? 0 : (x &gt; y) ? 1 : (-1);</span></span><br><span class="line">        <span class="comment">//方法二</span></span><br><span class="line">        <span class="keyword">return</span> (x == y) ? <span class="number">0</span> : (x - y);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>如果要按照降序排序，则o1 小于o2，返回1（正数），相等返回0，o1大于o2返回-1（负数）   【PS:X轴    负数—0—正数   o1&gt;o2返回负数，则o1排在左边(大的排左边)，表示降序】</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Comparator comparator = <span class="keyword">new</span> Comparator() &#123; </span><br><span class="line">	<span class="meta">@Override</span> </span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compare</span><span class="params">(Integer x, Integer y)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//方法一</span></span><br><span class="line">        <span class="comment">//  return (x == y) ? 0 : (x &lt; y) ? 1 : (-1);</span></span><br><span class="line">        <span class="comment">//方法二</span></span><br><span class="line">        <span class="keyword">return</span> (x == y) ? <span class="number">0</span> : (y - x);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Comparator</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Comparable</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">升序降序</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/08/07/Comparable-Comparator区别-comparator升序降序实现/">more >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1131,6 +1125,18 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">javacc</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">编译原理</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">mvvm</a>
               </li>
              
@@ -1143,14 +1149,6 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">RSA</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">安全性</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Sublime Text</a>
               </li>
              
@@ -1160,6 +1158,22 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">IDE</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">RSA</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">安全性</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Java Concurrent</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Java并发</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1180,18 +1194,6 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">架构</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">java</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">javacc</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">编译原理</a>
               </li>
              
               <li class="article-tag-list-item">

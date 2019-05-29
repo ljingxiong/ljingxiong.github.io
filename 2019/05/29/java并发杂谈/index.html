@@ -6,19 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://ljingxiong.github.io">
-  <title>Tag: 编译原理 | 渭水飞熊の博客</title>
+  <title>java并发杂谈 | 渭水飞熊の博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="纸上得来终觉浅，绝知此事要躬行;">
-<meta name="keywords" content="渭水飞熊 博客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="渭水飞熊の博客">
-<meta property="og:url" content="https://ljingxiong.github.io/tags/编译原理/index.html">
+  <meta name="description" content="Thread(1)线程是程序执行(CPU)的最小单位，而进程是操作系统分配资源的最小单位； (2)cpu架构调优，则需要 jvm参数配置 (3)window: cmd-&amp;gt;wmic - cpu:  cup get * - 内存：memorychip Lockobject -&amp;gt;  wait/notify/notifyAll  需要与synchronized配合使用condition-&amp;gt">
+<meta name="keywords" content="Java,Java Concurrent,Java并发">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java并发杂谈">
+<meta property="og:url" content="https://ljingxiong.github.io/2019/05/29/java并发杂谈/index.html">
 <meta property="og:site_name" content="渭水飞熊の博客">
-<meta property="og:description" content="纸上得来终觉浅，绝知此事要躬行;">
+<meta property="og:description" content="Thread(1)线程是程序执行(CPU)的最小单位，而进程是操作系统分配资源的最小单位； (2)cpu架构调优，则需要 jvm参数配置 (3)window: cmd-&amp;gt;wmic - cpu:  cup get * - 内存：memorychip Lockobject -&amp;gt;  wait/notify/notifyAll  需要与synchronized配合使用condition-&amp;gt">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-05-29T09:33:19.501Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="渭水飞熊の博客">
-<meta name="twitter:description" content="纸上得来终觉浅，绝知此事要躬行;">
+<meta name="twitter:title" content="java并发杂谈">
+<meta name="twitter:description" content="Thread(1)线程是程序执行(CPU)的最小单位，而进程是操作系统分配资源的最小单位； (2)cpu架构调优，则需要 jvm参数配置 (3)window: cmd-&amp;gt;wmic - cpu:  cup get * - 内存：memorychip Lockobject -&amp;gt;  wait/notify/notifyAll  需要与synchronized配合使用condition-&amp;gt">
   
     <link rel="alternative" href="/atom.xml" title="渭水飞熊の博客" type="application/atom+xml">
   
@@ -152,114 +153,186 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-java并发杂谈" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/05/16/编译原理与javacc/" class="archive-article-date">
-  	<time datetime="2019-05-16T06:40:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-16</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/05/16/编译原理与javacc/">编译原理与JavaCC</a>
+    <h1 class="article-title" itemprop="name">
+      java并发杂谈
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2019/05/29/java并发杂谈/" class="archive-article-date">
+  	<time datetime="2019-05-29T09:20:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-29</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h5 id="Thread"><a href="#Thread" class="headerlink" title="Thread"></a>Thread</h5><p>(1)线程是程序执行(CPU)的最小单位，而进程是操作系统分配资源的最小单位；</p>
+<p>(2)cpu架构调优，则需要 jvm参数配置</p>
+<p>(3)window: cmd-&gt;wmic</p>
+<pre><code>- cpu:  cup get *
+- 内存：memorychip
+</code></pre><h5 id="Lock"><a href="#Lock" class="headerlink" title="Lock"></a>Lock</h5><p>object -&gt;  wait/notify/notifyAll  需要与synchronized配合使用<br>condition-&gt; await/signal/singalAll 需要与lock配合使用,底层使用的是locksupport<br>locksupport-&gt;park/unpark   解决wait,notify顺序问题</p>
+<p>synchronized是获取对象的内部锁，所以是原生语法层面的互斥，需要JVM实现。<br>ReentrantLock是jdk1.5开始引入的JUC并发包中的一个类，ReentrantLock基于java代码实现，也就是API层面的互斥。ReentrantLock(synchronized的java版实现，并且提供了更丰富的接口)</p>
+<h5 id="Thread-Pool"><a href="#Thread-Pool" class="headerlink" title="Thread Pool"></a>Thread Pool</h5><p>线程池的好处：<br>消除了频繁创建和销毁线程的系统资源开销；<br>面对过量任务的提交能够平缓劣化。</p>
+<p>T1(创建)+T2（运行）+T3（销毁），节省的是T1+T3的时间</p>
+<h5 id="Concurrent-Control"><a href="#Concurrent-Control" class="headerlink" title="Concurrent Control"></a>Concurrent Control</h5><p>CountDownLatch允许一个或多个线程等待一组事件的产生，而CyclicBarrier用于等待其他线程运行到栅栏位置。<br>CountDownLatch的计数器只能使用一次，而CyclicBarrier的计数器可以使用reset()方法重置，可以使用多次，所以CyclicBarrier能够处理更为复杂的场景<br>Semaphore</p>
+<p>AtomicStampedReference 解决CAS的ABA问题</p>
+<p>##### </p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>又有鸡腿吃了<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">javacc</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Java Concurrent</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">编译原理</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Java并发</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://ljingxiong.github.io/2019/05/29/java并发杂谈/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/05/16/JavaCC简介/" class="archive-article-date">
-  	<time datetime="2019-05-16T03:00:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-16</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2019/05/24/线程池/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">线程池</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/05/16/JavaCC简介/">JavaCC简介</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">javacc</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">编译原理</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+  
+
+  
 
 
           </div>
@@ -284,9 +357,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
