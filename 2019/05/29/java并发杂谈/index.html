@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="https://ljingxiong.github.io">
   <title>java并发杂谈 | 渭水飞熊の博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Thread(1)线程是程序执行的最小单位即cpu调度的最小单位，而进程是操作系统分配资源的最小单位； (2)cpu架构调优，则需要 jvm参数配置 (3)window: cmd-&amp;gt;wmic - cpu:  cup get * - 内存：memorychip Lockobject -&amp;gt;  wait/notify/notifyAll  需要与synchronized配合使用conditi">
+  <meta name="description" content="Thread(1)线程是程序执行的最小单位即cpu调度的最小单位，而进程是操作系统分配资源的最小单位； (2)cpu架构调优，则需要 jvm参数配置 (3)如何查看cpu、内存信息    123  window: cmd-&amp;gt;wmic- cpu:  cup get *- 内存：memorychip  (4) Thread.sleep 让出CPU给其它线程，但是不会释放锁:::::::Threa">
 <meta name="keywords" content="Java,Java Concurrent,Java并发">
 <meta property="og:type" content="article">
 <meta property="og:title" content="java并发杂谈">
 <meta property="og:url" content="https://ljingxiong.github.io/2019/05/29/java并发杂谈/index.html">
 <meta property="og:site_name" content="渭水飞熊の博客">
-<meta property="og:description" content="Thread(1)线程是程序执行的最小单位即cpu调度的最小单位，而进程是操作系统分配资源的最小单位； (2)cpu架构调优，则需要 jvm参数配置 (3)window: cmd-&amp;gt;wmic - cpu:  cup get * - 内存：memorychip Lockobject -&amp;gt;  wait/notify/notifyAll  需要与synchronized配合使用conditi">
+<meta property="og:description" content="Thread(1)线程是程序执行的最小单位即cpu调度的最小单位，而进程是操作系统分配资源的最小单位； (2)cpu架构调优，则需要 jvm参数配置 (3)如何查看cpu、内存信息    123  window: cmd-&amp;gt;wmic- cpu:  cup get *- 内存：memorychip  (4) Thread.sleep 让出CPU给其它线程，但是不会释放锁:::::::Threa">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-05-30T09:31:57.860Z">
+<meta property="og:updated_time" content="2019-05-30T09:44:11.064Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="java并发杂谈">
-<meta name="twitter:description" content="Thread(1)线程是程序执行的最小单位即cpu调度的最小单位，而进程是操作系统分配资源的最小单位； (2)cpu架构调优，则需要 jvm参数配置 (3)window: cmd-&amp;gt;wmic - cpu:  cup get * - 内存：memorychip Lockobject -&amp;gt;  wait/notify/notifyAll  需要与synchronized配合使用conditi">
+<meta name="twitter:description" content="Thread(1)线程是程序执行的最小单位即cpu调度的最小单位，而进程是操作系统分配资源的最小单位； (2)cpu架构调优，则需要 jvm参数配置 (3)如何查看cpu、内存信息    123  window: cmd-&amp;gt;wmic- cpu:  cup get *- 内存：memorychip  (4) Thread.sleep 让出CPU给其它线程，但是不会释放锁:::::::Threa">
   
     <link rel="alternative" href="/atom.xml" title="渭水飞熊の博客" type="application/atom+xml">
   
@@ -175,10 +175,9 @@
       
         <h5 id="Thread"><a href="#Thread" class="headerlink" title="Thread"></a>Thread</h5><p>(1)线程是程序执行的最小单位即cpu调度的最小单位，而进程是操作系统分配资源的最小单位；</p>
 <p>(2)cpu架构调优，则需要 jvm参数配置</p>
-<p>(3)window: cmd-&gt;wmic</p>
-<pre><code>- cpu:  cup get *
-- 内存：memorychip
-</code></pre><h5 id="Lock"><a href="#Lock" class="headerlink" title="Lock"></a>Lock</h5><p>object -&gt;  wait/notify/notifyAll  需要与synchronized配合使用<br>condition-&gt; await/signal/singalAll 需要与lock配合使用,底层使用的是locksupport<br>locksupport-&gt;park/unpark   解决wait,notify顺序问题</p>
+<p>(3)如何查看cpu、内存信息<br>    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">  window: cmd-&gt;wmic</span><br><span class="line">- cpu:  cup get *</span><br><span class="line">- 内存：memorychip</span><br></pre></td></tr></table></figure></p>
+<p> (4) Thread.sleep 让出CPU给其它线程，但是不会释放锁:::::::Thread.wait 让出cpu，并释放锁</p>
+<h5 id="Lock"><a href="#Lock" class="headerlink" title="Lock"></a>Lock</h5><p>object -&gt;  wait/notify/notifyAll  需要与synchronized配合使用<br>condition-&gt; await/signal/singalAll 需要与lock配合使用,底层使用的是locksupport<br>locksupport-&gt;park/unpark   解决wait,notify顺序问题</p>
 <p>synchronized是获取对象的内部锁，所以是原生语法层面的互斥，需要JVM实现。<br>ReentrantLock是jdk1.5开始引入的JUC并发包中的一个类，ReentrantLock基于java代码实现，也就是API层面的互斥。ReentrantLock(synchronized的java版实现，并且提供了更丰富的接口)</p>
 <h5 id="Thread-Pool"><a href="#Thread-Pool" class="headerlink" title="Thread Pool"></a>Thread Pool</h5><p>线程池的好处：<br>消除了频繁创建和销毁线程的系统资源开销；<br>面对过量任务的提交能够平缓劣化。</p>
 <p>T1(创建)+T2（运行）+T3（销毁），节省的是T1+T3的时间</p>
@@ -457,6 +456,10 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">开篇</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Comparator</a>
               </li>
              
@@ -466,10 +469,6 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">升序降序</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">开篇</a>
               </li>
              
               <li class="article-tag-list-item">
