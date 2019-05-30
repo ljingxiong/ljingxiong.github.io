@@ -174,7 +174,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h5 id="Thread"><a href="#Thread" class="headerlink" title="Thread"></a>Thread</h5><p>(1)线程是程序执行(CPU)的最小单位，而进程是操作系统分配资源的最小单位；</p>
+        <h5 id="Thread"><a href="#Thread" class="headerlink" title="Thread"></a>Thread</h5><p>(1)线程是程序执行的最小单位即cpu调度的最小单位，而进程是操作系统分配资源的最小单位；</p>
 <p>(2)cpu架构调优，则需要 jvm参数配置</p>
 <p>(3)window: cmd-&gt;wmic</p>
 <pre><code>- cpu:  cup get *
@@ -184,8 +184,16 @@
 <h5 id="Thread-Pool"><a href="#Thread-Pool" class="headerlink" title="Thread Pool"></a>Thread Pool</h5><p>线程池的好处：<br>消除了频繁创建和销毁线程的系统资源开销；<br>面对过量任务的提交能够平缓劣化。</p>
 <p>T1(创建)+T2（运行）+T3（销毁），节省的是T1+T3的时间</p>
 <h5 id="Concurrent-Control"><a href="#Concurrent-Control" class="headerlink" title="Concurrent Control"></a>Concurrent Control</h5><p>CountDownLatch允许一个或多个线程等待一组事件的产生，而CyclicBarrier用于等待其他线程运行到栅栏位置。<br>CountDownLatch的计数器只能使用一次，而CyclicBarrier的计数器可以使用reset()方法重置，可以使用多次，所以CyclicBarrier能够处理更为复杂的场景<br>Semaphore</p>
-<p>AtomicStampedReference 解决CAS的ABA问题</p>
-<p>##### </p>
+<h5 id="atomic"><a href="#atomic" class="headerlink" title="atomic"></a>atomic</h5><p>AtomicStampedReference 解决CAS的ABA问题</p>
+<h5 id="线程安全"><a href="#线程安全" class="headerlink" title="线程安全"></a>线程安全</h5><p>线程安全主要体现在以下三个方面：</p>
+<ul>
+<li>原子性：提供了互斥访问，同一时刻只能有一个线程对它进行操作</li>
+<li>可见性：一个线程对主内存的修改可以及时的被其他线程观察到</li>
+<li>有序性：一个线程观察其他线程中的指令执行顺序，由于指令重排序的存在，该观察结果一般杂乱无序</li>
+</ul>
+<p>Runable Callable Future   RunableFuture  FutureTask</p>
+<h5 id="AQS"><a href="#AQS" class="headerlink" title="AQS"></a>AQS</h5><p><a href="https://www.cnblogs.com/iou123lg/p/9464385.html" target="_blank" rel="noopener">https://www.cnblogs.com/iou123lg/p/9464385.html</a></p>
+<h5 id="java特性"><a href="#java特性" class="headerlink" title="java特性"></a>java特性</h5><p><a href="https://blog.csdn.net/f641385712/article/details/81783266" target="_blank" rel="noopener">https://blog.csdn.net/f641385712/article/details/81783266</a></p>
 <p>参考资料：<br><a href="http://fangjian0423.github.io/page/6/" target="_blank" rel="noopener">http://fangjian0423.github.io/page/6/</a></p>
 
       
@@ -1086,15 +1094,27 @@
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Java</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">前端</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">CSS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Java</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">线程池</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">队列</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">线程池+队列</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1123,18 +1143,6 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">编译原理</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">线程池</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">队列</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">线程池+队列</a>
               </li>
              
               <li class="article-tag-list-item">
