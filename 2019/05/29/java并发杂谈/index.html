@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="渭水飞熊の博客">
 <meta property="og:description" content="1. 线程的三个特性 原子性  提供了互斥访问，同一时刻只能有一个线程对它进行操作  ① 所谓的原子性，就是在执行过程中不会被线程调度机制打断的操作，这种操作从开始就一直运行到结束，中间不存在任何上下文切换。例如 a=1是原子性操作，但是a++和a +=1就不是原子性操作。  ② 原子性是拒绝多线程操作的，不论是多核还是单核，具有原子性的量，同一时刻只能有一个线程来对它进行操作。(提供了互斥访问)">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-05-31T09:04:04.354Z">
+<meta property="og:updated_time" content="2019-05-31T09:06:08.242Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="java并发杂谈">
 <meta name="twitter:description" content="1. 线程的三个特性 原子性  提供了互斥访问，同一时刻只能有一个线程对它进行操作  ① 所谓的原子性，就是在执行过程中不会被线程调度机制打断的操作，这种操作从开始就一直运行到结束，中间不存在任何上下文切换。例如 a=1是原子性操作，但是a++和a +=1就不是原子性操作。  ② 原子性是拒绝多线程操作的，不论是多核还是单核，具有原子性的量，同一时刻只能有一个线程来对它进行操作。(提供了互斥访问)">
@@ -223,6 +223,7 @@
 <h5 id="10-Unsafe"><a href="#10-Unsafe" class="headerlink" title="10. Unsafe"></a>10. Unsafe</h5><p>Unsafe是Java提供用来访问系统底层的工具类，它大致有这几个能力：<br>①直接分队释放堆外内存。Java的直接内存就是通过这个来实现。<br>②线程的挂起和恢复。后边咱们要说的LockSupport就是通过这个实现。<br>③CAS操作。即Compare And Swap，简单地说就是比较并交换。在保证‘读改写’一致性上极其有用。它在写操作时会先比较当前内存里的值是否和改之前读的值是否一致，如果一致则修改成功，不一致则修改失败。</p>
 <h5 id="11-Fork-Join-Pool"><a href="#11-Fork-Join-Pool" class="headerlink" title="11. Fork/Join Pool"></a>11. Fork/Join Pool</h5><p>ForkJoinPool 采用优良的设计、代码实现和硬件原子操作机制等多种思路保证其执行性能。其中包括（但不限于）：计算资源共享、高性能队列、避免伪共享、工作窃取机制等。<br>Fork/Join框架是Java7提供的一个用于并行执行任务的框架， 是一个把大任务分割成若干个小任务，最终汇总每个小任务结果后得到大任务结果的框架。使用工作窃取（work-stealing）算法，主要用于实现“分而治之”。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Slf</span>4j</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ForkJoinTaskExample</span> <span class="keyword">extends</span> <span class="title">RecursiveTask</span>&lt;<span class="title">Integer</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> threshold = <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> start;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> end;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ForkJoinTaskExample</span><span class="params">(<span class="keyword">int</span> start, <span class="keyword">int</span> end)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.start = start;</span><br><span class="line">        <span class="keyword">this</span>.end = end;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> Integer <span class="title">compute</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//如果任务足够小就计算任务</span></span><br><span class="line">        <span class="keyword">boolean</span> canCompute = (end - start) &lt;= threshold;</span><br><span class="line">        <span class="keyword">if</span> (canCompute) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = start; i &lt;= end; i++) &#123;</span><br><span class="line">                sum += i;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// 如果任务大于阈值，就分裂成两个子任务计算</span></span><br><span class="line">            <span class="keyword">int</span> middle = (start + end) / <span class="number">2</span>;</span><br><span class="line">            ForkJoinTaskExample leftTask = <span class="keyword">new</span> ForkJoinTaskExample(start, middle);</span><br><span class="line">            ForkJoinTaskExample rightTask = <span class="keyword">new</span> ForkJoinTaskExample(middle + <span class="number">1</span>, end);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 执行子任务</span></span><br><span class="line">            leftTask.fork();</span><br><span class="line">            rightTask.fork();</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 等待任务执行结束合并其结果</span></span><br><span class="line">            <span class="keyword">int</span> leftResult = leftTask.join();</span><br><span class="line">            <span class="keyword">int</span> rightResult = rightTask.join();</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 合并子任务</span></span><br><span class="line">            sum = leftResult + rightResult;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> sum;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        ForkJoinPool forkjoinPool = <span class="keyword">new</span> ForkJoinPool();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//生成一个计算任务，计算1+2+3+4</span></span><br><span class="line">        ForkJoinTaskExample task = <span class="keyword">new</span> ForkJoinTaskExample(<span class="number">1</span>, <span class="number">100</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//执行一个任务</span></span><br><span class="line">        Future&lt;Integer&gt; result = forkjoinPool.submit(task);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            log.info(<span class="string">"result:&#123;&#125;"</span>, result.get());</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            log.error(<span class="string">"exception"</span>, e);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>需要特别注意的是：<br>① ForkJoinPool 使用submit 或 invoke 提交的区别：invoke是同步执行，调用之后需要等待任务完成，才能执行后面的代码；submit是异步执行，只有在Future调用get的时候会阻塞。<br>② 这里继承的是RecursiveTask，还可以继承RecursiveAction。前者适用于有返回值的场景，而后者适合于没有返回值的场景<br>③ 这一点是最容易忽略的地方，其实这里执行子任务调用fork方法并不是最佳的选择，最佳的选择是invokeAll方法。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">leftTask.fork();  </span><br><span class="line">rightTask.fork();</span><br><span class="line">替换为</span><br><span class="line">invokeAll(leftTask, rightTask);</span><br><span class="line"></span><br><span class="line"><span class="comment">//具体说一下原理：对于Fork/Join模式，假如Pool里面线程数量是固定的，那么调用子任务的fork方法相当于A先分工给B，然后A当监工不干活，B去完成A交代的任务。所以上面的模式相当于浪费了一个线程。那么如果使用invokeAll相当于A分工给B后，A和B都去完成工作。这样可以更好的利用线程池，缩短执行的时间。</span></span><br></pre></td></tr></table></figure></p>
+<p><a href="https://www.imooc.com/article/24822" target="_blank" rel="noopener">https://www.imooc.com/article/24822</a></p>
 <p>参考资料：<br><a href="http://fangjian0423.github.io/page/6/" target="_blank" rel="noopener">http://fangjian0423.github.io/page/6/</a></p>
 
       
@@ -515,19 +516,23 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Thread</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">线程</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">RSA</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">安全性</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">mvvm</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Thread</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">线程</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -540,10 +545,6 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">IDE</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">mvvm</a>
               </li>
              
               <li class="article-tag-list-item">
