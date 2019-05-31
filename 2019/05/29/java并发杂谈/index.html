@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="https://ljingxiong.github.io">
   <title>java并发杂谈 | 渭水飞熊の博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="线程的三个特性 原子性  （1）原子是构成物质的基本单位（当然电子等暂且不论），所以原子的意思代表着——“不可分”；  （2）原子性是拒绝多线程操作的，不论是多核还是单核，具有原子性的量，同一时刻只能有一个线程来对它进行操作。简而言之，在整个操作过程中不会被线程调度器中断的操作，都可认为是原子性。例如 a=1是原子性操作，但是a++和a +=1就不是原子性操作。 非原子性  （1）也就是整个过程中">
+  <meta name="description" content="1. 线程的三个特性 原子性  提供了互斥访问，同一时刻只能有一个线程对它进行操作  ① 所谓的原子性，就是在执行过程中不会被线程调度机制打断的操作，这种操作从开始就一直运行到结束，中间不存在任何上下文切换。例如 a=1是原子性操作，但是a++和a +=1就不是原子性操作。  ② 原子性是拒绝多线程操作的，不论是多核还是单核，具有原子性的量，同一时刻只能有一个线程来对它进行操作。(提供了互斥访问)">
 <meta name="keywords" content="Java,Java Concurrent,Java并发">
 <meta property="og:type" content="article">
 <meta property="og:title" content="java并发杂谈">
 <meta property="og:url" content="https://ljingxiong.github.io/2019/05/29/java并发杂谈/index.html">
 <meta property="og:site_name" content="渭水飞熊の博客">
-<meta property="og:description" content="线程的三个特性 原子性  （1）原子是构成物质的基本单位（当然电子等暂且不论），所以原子的意思代表着——“不可分”；  （2）原子性是拒绝多线程操作的，不论是多核还是单核，具有原子性的量，同一时刻只能有一个线程来对它进行操作。简而言之，在整个操作过程中不会被线程调度器中断的操作，都可认为是原子性。例如 a=1是原子性操作，但是a++和a +=1就不是原子性操作。 非原子性  （1）也就是整个过程中">
+<meta property="og:description" content="1. 线程的三个特性 原子性  提供了互斥访问，同一时刻只能有一个线程对它进行操作  ① 所谓的原子性，就是在执行过程中不会被线程调度机制打断的操作，这种操作从开始就一直运行到结束，中间不存在任何上下文切换。例如 a=1是原子性操作，但是a++和a +=1就不是原子性操作。  ② 原子性是拒绝多线程操作的，不论是多核还是单核，具有原子性的量，同一时刻只能有一个线程来对它进行操作。(提供了互斥访问)">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-05-31T06:00:34.567Z">
+<meta property="og:updated_time" content="2019-05-31T09:04:04.354Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="java并发杂谈">
-<meta name="twitter:description" content="线程的三个特性 原子性  （1）原子是构成物质的基本单位（当然电子等暂且不论），所以原子的意思代表着——“不可分”；  （2）原子性是拒绝多线程操作的，不论是多核还是单核，具有原子性的量，同一时刻只能有一个线程来对它进行操作。简而言之，在整个操作过程中不会被线程调度器中断的操作，都可认为是原子性。例如 a=1是原子性操作，但是a++和a +=1就不是原子性操作。 非原子性  （1）也就是整个过程中">
+<meta name="twitter:description" content="1. 线程的三个特性 原子性  提供了互斥访问，同一时刻只能有一个线程对它进行操作  ① 所谓的原子性，就是在执行过程中不会被线程调度机制打断的操作，这种操作从开始就一直运行到结束，中间不存在任何上下文切换。例如 a=1是原子性操作，但是a++和a +=1就不是原子性操作。  ② 原子性是拒绝多线程操作的，不论是多核还是单核，具有原子性的量，同一时刻只能有一个线程来对它进行操作。(提供了互斥访问)">
   
     <link rel="alternative" href="/atom.xml" title="渭水飞熊の博客" type="application/atom+xml">
   
@@ -173,41 +173,42 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h5 id="线程的三个特性"><a href="#线程的三个特性" class="headerlink" title="线程的三个特性"></a>线程的三个特性</h5><ul>
-<li>原子性<br>  （1）原子是构成物质的基本单位（当然电子等暂且不论），所以原子的意思代表着——“不可分”；<br>  （2）原子性是拒绝多线程操作的，不论是多核还是单核，具有原子性的量，同一时刻只能有一个线程来对它进行操作。简而言之，在整个操作过程中不会被线程调度器中断的操作，都可认为是原子性。例如 a=1是原子性操作，但是a++和a +=1就不是原子性操作。</li>
-<li>非原子性<br>  （1）也就是整个过程中会出现线程调度器中断操作的现象，例如：<br>  类似”a += b”这样的操作不具有原子性，在某些JVM中”a += b”可能要经过这样三个步骤：<br>  （1）取出a和b<br>  （2）计算a+b<br>  （3）将计算结果写入内存<br>  如果有两个线程t1,t2在进行这样的操作。t1在第二步做完之后还没来得及把数据写回内存就被线程调度器中断了，于是t2开始执行，t2执行完毕后t1又把没有完成的第三步做完。这个时候就出现了错误，相当于t2的计算结果被无视掉了。所以上面的买碘片例子在同步add方法之前，实际结果总是小于预期结果的，因为很多操作都被无视掉了。<br>  类似的，像”a++”这样的操作也都不具有原子性。所以在多线程的环境下一定要记得进行同步操作。</li>
-<li><p>可见性<br>  可见性volatile修饰词,可以应对多线程同时访问修改同一变量，由于相互的不可见性所带来的不可预期的结果，存在二义性的现象，出现的。<br>   多线程变量不可见：当一个线程对一变量a修改后，还没有来得及将修改后的a值回写到主存，而被线程调度器中断操作（或收回时间片），然后让另一线程进行对a变量的访问修改，这时候，后来的线程并不知道a值已经修改过，它使用的仍旧是修改之前的a值，这样修改后的a值就被另一线程覆盖掉了。</p>
-<p>   多线程变量可见：被volatile修饰的成员变量在每次被线程访问时，都强迫从内存中重读该成员变量的值；而且，当成员变量发生变化时，强迫线程将变化值回写到共享内存，这样在任何时刻两个不同线程总是看到某一成员变量的同一个值，这就是保证了可见性。</p>
-<pre><code>volatile使用场景：在两个或者更多的线程访问的成员变量上使用volatile。当要访问的变量已在synchronized代码块中，或者为常量时，不必使用。
-</code></pre><p>  由于使用volatile屏蔽掉了JVM中必要的代码优化，所以在效率上比较低，因此一定在必要时才使用此关键字。<br>  注意：<br>  如果给一个变量加上volatile修饰符，就相当于：每一个线程中一旦这个值发生了变化就马上刷新回主存，使得各个线程取出的值相同。编译器不要对这个变量的读、写操作做优化。但是值得注意的是，除了对long和double的简单操作之外，volatile并不能提供原子性。所以，就算你将一个变量修饰为volatile，但是对这个变量的操作并不是原子的，在并发环境下，还是不能避免错误的发生！</p>
-<p>   synchronized为一段操作或内存进行加锁，它具有互斥性。当线程要操作被synchronized修饰的内存或操作时，必须首先获得锁才能进行后续操作；但是在同一时刻只能有一个线程获得相同的一把锁（对象监视器），所以它只允许一个线程进行操作。</p>
-</li>
-<li>有序性<br>  防止编译器或者CPU对指令进行重排</li>
-</ul>
+        <h5 id="1-线程的三个特性"><a href="#1-线程的三个特性" class="headerlink" title="1. 线程的三个特性"></a>1. 线程的三个特性</h5><ul>
+<li><p><strong>原子性</strong><br>  提供了互斥访问，同一时刻只能有一个线程对它进行操作<br>  ① 所谓的原子性，就是在执行过程中不会被线程调度机制打断的操作，这种操作从开始就一直运行到结束，中间不存在任何上下文切换。例如 a=1是原子性操作，但是a++和a +=1就不是原子性操作。<br>  ② 原子性是拒绝多线程操作的，不论是多核还是单核，具有原子性的量，同一时刻只能有一个线程来对它进行操作。(提供了互斥访问)<br>  ③ 原子性操作是要硬件层面的支持。a++操作为例,这是一个典型的‘读改写’的操作。在多线程的情况下，必须需要<code>硬件的支持</code>来保证‘读改写’的原子性，底层原理可以简单理解，通过<code>锁总线</code>的方式来实现。</p>
 <a id="more"></a>
-<h5 id="Thread"><a href="#Thread" class="headerlink" title="Thread"></a>Thread</h5><p>(1)线程是程序执行的最小单位即cpu调度的最小单位，而进程是操作系统分配资源的最小单位；</p>
+</li>
+<li><p><strong>非原子性</strong><br>  类似”a += b”这样的操作不具有原子性，在某些JVM中”a += b”可能要经过这样三个步骤：<br>  ① 取出a和b<br>  ② 计算a+b<br>  ③ 将计算结果写入内存<br>  如果有两个线程t1,t2在进行这样的操作。t1在第二步做完之后还没来得及把数据写回内存就被线程调度器中断了，于是t2开始执行，t2执行完毕后t1又把没有完成的第三步做完。这个时候就出现了错误，相当于t2的计算结果被无视掉了。所以实际结果总是小于预期结果的，因为很多操作都被无视掉了。</p>
+</li>
+<li><strong>可见性</strong><br>  一个线程对主内存的修改可以及时的被其他线程观察到<br>  ① 多线程变量不可见：当一个线程对一变量a修改后，还没有来得及将修改后的a值回写到主存，而被线程调度器中断操作（或收回时间片），然后让另一线程进行对a变量的访问修改，这时候，后来的线程并不知道a值已经修改过，它使用的仍旧是修改之前的a值，这样修改后的a值就被另一线程覆盖掉了。<br>  ② volatile,可以应对多线程同时访问修改同一变量，由于相互的不可见性所带来的不可预期的结果，存在二义性的现象，出现的。<br>  如果给一个变量加上volatile修饰符，就相当于：每一个线程中一旦这个值发生了变化就马上刷新回主存，使得各个线程取出的值相同。编译器不要对这个变量的读、写操作做优化。但是值得注意的是，volatile并不能提供原子性。所以，就算你将一个变量修饰为volatile，但是对这个变量的操作并不是原子的，在并发环境下，还是不能避免错误的发生！<br>  ③ synchronized为一段操作或内存进行加锁，它具有互斥性。当线程要操作被synchronized修饰的内存或操作时，必须首先获得锁才能进行后续操作；但是在同一时刻只能有一个线程获得相同的一把锁（对象监视器），所以它只允许一个线程进行操作。</li>
+<li><strong>有序性</strong><br>  一个线程观察其他线程中的指令执行顺序，由于指令重排序的存在，该观察结果一般杂乱无序<br>  防止编译器或者CPU对指令进行重排</li>
+</ul>
+<p><a href="https://www.cnblogs.com/qingquanzi/p/8215286.html" target="_blank" rel="noopener">https://www.cnblogs.com/qingquanzi/p/8215286.html</a></p>
+<h5 id="2-Thread"><a href="#2-Thread" class="headerlink" title="2. Thread"></a>2. Thread</h5><p>(1)线程是程序执行的最小单位即cpu调度的最小单位，而进程是操作系统分配资源的最小单位；</p>
 <p>(2)cpu架构调优，则需要 jvm参数配置</p>
-<p>(3)如何查看cpu、内存信息<br>    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">  window: cmd-&gt;wmic</span><br><span class="line">- cpu:  cup get *</span><br><span class="line">- 内存：memorychip</span><br></pre></td></tr></table></figure></p>
-<p> (4) Thread.sleep 让出CPU给其它线程，但是不会释放锁:::::::Thread.wait 让出cpu，并释放锁</p>
-<h5 id="Lock"><a href="#Lock" class="headerlink" title="Lock"></a>Lock</h5><p>object -&gt;  wait/notify/notifyAll  需要与synchronized配合使用<br>condition-&gt; await/signal/singalAll 需要与lock配合使用,底层使用的是locksupport<br>locksupport-&gt;park/unpark   解决wait,notify顺序问题</p>
+<p>(3)如何查看cpu、内存信息<br><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">C:\<span class="title">Users</span>\<span class="title">Roy</span> <span class="title">Lea</span>&gt;<span class="title">wmic</span></span></span><br><span class="line"><span class="function"><span class="title">wmic:root</span>\<span class="title">cli</span>&gt;<span class="title">cup</span> <span class="title">get</span> * //<span class="title">cpu</span></span></span><br><span class="line"><span class="function"><span class="title">wmic:root</span>\<span class="title">cli</span>&gt;<span class="title">memorychip</span> //内存</span></span><br></pre></td></tr></table></figure></p>
+<p>(4) Thread.sleep 让出CPU给其它线程，但是不会释放锁:::::::Thread.wait 让出cpu，并释放锁</p>
+<p>(5) Runable Callable Future   RunableFuture  FutureTask</p>
+<h5 id="3-Lock"><a href="#3-Lock" class="headerlink" title="3. Lock"></a>3. Lock</h5><p>object -&gt;  wait/notify/notifyAll  需要与synchronized配合使用<br>condition-&gt; await/signal/singalAll 需要与lock配合使用,底层使用的是locksupport<br>locksupport-&gt;park/unpark   解决wait,notify顺序问题</p>
 <p>synchronized是获取对象的内部锁，所以是原生语法层面的互斥，需要JVM实现。<br>ReentrantLock是jdk1.5开始引入的JUC并发包中的一个类，ReentrantLock基于java代码实现，也就是API层面的互斥。ReentrantLock(synchronized的java版实现，并且提供了更丰富的接口)</p>
-<h5 id="Thread-Pool"><a href="#Thread-Pool" class="headerlink" title="Thread Pool"></a>Thread Pool</h5><p>线程池的好处：<br>消除了频繁创建和销毁线程的系统资源开销；<br>面对过量任务的提交能够平缓劣化。</p>
-<p>T1(创建)+T2（运行）+T3（销毁），节省的是T1+T3的时间</p>
-<h5 id="Concurrent-Control"><a href="#Concurrent-Control" class="headerlink" title="Concurrent Control"></a>Concurrent Control</h5><p>CountDownLatch允许一个或多个线程等待一组事件的产生，而CyclicBarrier用于等待其他线程运行到栅栏位置。</p>
+<h5 id="4-Thread-Pool"><a href="#4-Thread-Pool" class="headerlink" title="4. Thread Pool"></a>4. Thread Pool</h5><p>① 线程池的好处：<br>消除了频繁创建和销毁线程的系统资源开销；<br>面对过量任务的提交能够平缓劣化。</p>
+<p>② T1(创建)+T2（运行）+T3（销毁），节省的是T1+T3的时间</p>
+<p>③ 优雅的关闭线程池<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//执行此函数后线程池不再接收新任务，并等待所有任务执行完毕后销毁线程。此函数并不会等待线程销毁完毕，而是立即返回的</span></span><br><span class="line">executor.shutdown();</span><br><span class="line"><span class="comment">//如想要同步等待线程池完成关闭，可使用下面的函数判断是否都执行完毕了，该函数等待timeout后，返回是否所有任务都执行完毕了</span></span><br><span class="line">pool.awaitTermination(timeout,TimeUnit)</span><br><span class="line"></span><br><span class="line"><span class="comment">//尝试结束所有活动线程，并返回等待队列里的任务</span></span><br><span class="line">executor.shutdownNow();</span><br></pre></td></tr></table></figure></p>
+<p>④ ExecutorCompletionService</p>
+<ul>
+<li>在我们日常使用线程池的时候，经常会有需要获得线程处理结果的时候。此时我们通常有两种做法。<ul>
+<li>使用并发容器将callable.call() 的返回Future存储起来。然后使用一个消费者线程去遍历这个并发容器，调用Future.isDone()去判断各个任务是否处理完毕。然后再处理响应的业务。</li>
+<li>使用jdk 自带线程池结果管理器：ExecutorCompletionService。它将BlockingQueue 和Executor 封装起来。然后使用ExecutorCompletionService.submit()方法提交任务。</li>
+</ul>
+</li>
+</ul>
+<h5 id="5-Concurrent-Control"><a href="#5-Concurrent-Control" class="headerlink" title="5. Concurrent Control"></a>5. Concurrent Control</h5><p>CountDownLatch允许一个或多个线程等待一组事件的产生，而CyclicBarrier用于等待其他线程运行到栅栏位置。</p>
 <p>CountDownLatch的计数器只能使用一次，而CyclicBarrier的计数器可以使用reset()方法重置，可以使用多次，所以CyclicBarrier能够处理更为复杂的场景</p>
 <p>CountDownLatch和CyclicBarrier最大的区别是 一个阻塞主线程，一个是阻塞子线程</p>
 <p>Semaphore</p>
-<h5 id="atomic"><a href="#atomic" class="headerlink" title="atomic"></a>atomic</h5><p>AtomicStampedReference 解决CAS的ABA问题</p>
-<h5 id="线程安全"><a href="#线程安全" class="headerlink" title="线程安全"></a>线程安全</h5><p>线程安全主要体现在以下三个方面：</p>
-<ul>
-<li>原子性：提供了互斥访问，同一时刻只能有一个线程对它进行操作</li>
-<li>可见性：一个线程对主内存的修改可以及时的被其他线程观察到</li>
-<li>有序性：一个线程观察其他线程中的指令执行顺序，由于指令重排序的存在，该观察结果一般杂乱无序</li>
-</ul>
-<p>Runable Callable Future   RunableFuture  FutureTask</p>
-<h5 id="AQS"><a href="#AQS" class="headerlink" title="AQS"></a>AQS</h5><p><a href="https://www.cnblogs.com/iou123lg/p/9464385.html" target="_blank" rel="noopener">https://www.cnblogs.com/iou123lg/p/9464385.html</a></p>
-<h5 id="java特性"><a href="#java特性" class="headerlink" title="java特性"></a>java特性</h5><p><a href="https://blog.csdn.net/f641385712/article/details/81783266" target="_blank" rel="noopener">https://blog.csdn.net/f641385712/article/details/81783266</a></p>
-<h5 id="java内存模型"><a href="#java内存模型" class="headerlink" title="java内存模型"></a>java内存模型</h5><p><a href="https://www.cnblogs.com/qingquanzi/p/8179042.html" target="_blank" rel="noopener">https://www.cnblogs.com/qingquanzi/p/8179042.html</a><br><a href="https://www.jianshu.com/p/76959115d486" target="_blank" rel="noopener">https://www.jianshu.com/p/76959115d486</a><br>之所以扯了那么多计算机内存模型，是因为java内存模型的设定符合了计算机的规范。</p>
+<h5 id="6-atomic"><a href="#6-atomic" class="headerlink" title="6. atomic"></a>6. atomic</h5><p>AtomicStampedReference 解决CAS的ABA问题</p>
+<h5 id="7-AQS"><a href="#7-AQS" class="headerlink" title="7. AQS"></a>7. AQS</h5><p><a href="https://www.cnblogs.com/iou123lg/p/9464385.html" target="_blank" rel="noopener">https://www.cnblogs.com/iou123lg/p/9464385.html</a></p>
+<h5 id="8-java特性"><a href="#8-java特性" class="headerlink" title="8. java特性"></a>8. java特性</h5><p><a href="https://blog.csdn.net/f641385712/article/details/81783266" target="_blank" rel="noopener">https://blog.csdn.net/f641385712/article/details/81783266</a></p>
+<h5 id="9-java内存模型"><a href="#9-java内存模型" class="headerlink" title="9. java内存模型"></a>9. java内存模型</h5><p><a href="https://www.cnblogs.com/qingquanzi/p/8179042.html" target="_blank" rel="noopener">https://www.cnblogs.com/qingquanzi/p/8179042.html</a><br><a href="https://www.jianshu.com/p/76959115d486" target="_blank" rel="noopener">https://www.jianshu.com/p/76959115d486</a><br>之所以扯了那么多计算机内存模型，是因为java内存模型的设定符合了计算机的规范。</p>
 <p>Java程序内存的分配是在JVM虚拟机内存分配机制下完成。</p>
 <p>简要言之，jmm是jvm的一种规范，定义了jvm的内存模型。它屏蔽了各种硬件和操作系统的访问差异，不像c那样直接访问硬件内存，相对安全很多，它的主要目的是解决由于多线程通过共享内存进行通信时，存在的本地内存数据不一致、编译器会对代码指令重排序、处理器会对代码乱序执行等带来的问题。可以保证并发编程场景中的原子性、可见性和有序性。</p>
 <p>Java虚拟机的内存模型和计算机硬件的内存模型基本一致。在Java内存模型中，分为线程私有的本地内存和线程共享的主内存，线程在读写变量时会把主内存里的变量缓存到本地内存，换句话说，本地内存存放了主内存中变量的副本。主内存和本地内存其实是一种逻辑上的划分，并不是实际的物理内存。</p>
@@ -219,6 +220,9 @@
 <li><p>内存屏障的作用<br>cpu执行指令可能是无序的，它有两个比较重要的作用<br>1.阻止屏障两侧指令重排序<br>2.强制把写缓冲区/高速缓存中的脏数据等写回主内存，让缓存中相应的数据失效。</p>
 </li>
 </ul>
+<h5 id="10-Unsafe"><a href="#10-Unsafe" class="headerlink" title="10. Unsafe"></a>10. Unsafe</h5><p>Unsafe是Java提供用来访问系统底层的工具类，它大致有这几个能力：<br>①直接分队释放堆外内存。Java的直接内存就是通过这个来实现。<br>②线程的挂起和恢复。后边咱们要说的LockSupport就是通过这个实现。<br>③CAS操作。即Compare And Swap，简单地说就是比较并交换。在保证‘读改写’一致性上极其有用。它在写操作时会先比较当前内存里的值是否和改之前读的值是否一致，如果一致则修改成功，不一致则修改失败。</p>
+<h5 id="11-Fork-Join-Pool"><a href="#11-Fork-Join-Pool" class="headerlink" title="11. Fork/Join Pool"></a>11. Fork/Join Pool</h5><p>ForkJoinPool 采用优良的设计、代码实现和硬件原子操作机制等多种思路保证其执行性能。其中包括（但不限于）：计算资源共享、高性能队列、避免伪共享、工作窃取机制等。<br>Fork/Join框架是Java7提供的一个用于并行执行任务的框架， 是一个把大任务分割成若干个小任务，最终汇总每个小任务结果后得到大任务结果的框架。使用工作窃取（work-stealing）算法，主要用于实现“分而治之”。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Slf</span>4j</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ForkJoinTaskExample</span> <span class="keyword">extends</span> <span class="title">RecursiveTask</span>&lt;<span class="title">Integer</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> threshold = <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> start;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> end;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ForkJoinTaskExample</span><span class="params">(<span class="keyword">int</span> start, <span class="keyword">int</span> end)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.start = start;</span><br><span class="line">        <span class="keyword">this</span>.end = end;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> Integer <span class="title">compute</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//如果任务足够小就计算任务</span></span><br><span class="line">        <span class="keyword">boolean</span> canCompute = (end - start) &lt;= threshold;</span><br><span class="line">        <span class="keyword">if</span> (canCompute) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = start; i &lt;= end; i++) &#123;</span><br><span class="line">                sum += i;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// 如果任务大于阈值，就分裂成两个子任务计算</span></span><br><span class="line">            <span class="keyword">int</span> middle = (start + end) / <span class="number">2</span>;</span><br><span class="line">            ForkJoinTaskExample leftTask = <span class="keyword">new</span> ForkJoinTaskExample(start, middle);</span><br><span class="line">            ForkJoinTaskExample rightTask = <span class="keyword">new</span> ForkJoinTaskExample(middle + <span class="number">1</span>, end);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 执行子任务</span></span><br><span class="line">            leftTask.fork();</span><br><span class="line">            rightTask.fork();</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 等待任务执行结束合并其结果</span></span><br><span class="line">            <span class="keyword">int</span> leftResult = leftTask.join();</span><br><span class="line">            <span class="keyword">int</span> rightResult = rightTask.join();</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 合并子任务</span></span><br><span class="line">            sum = leftResult + rightResult;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> sum;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        ForkJoinPool forkjoinPool = <span class="keyword">new</span> ForkJoinPool();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//生成一个计算任务，计算1+2+3+4</span></span><br><span class="line">        ForkJoinTaskExample task = <span class="keyword">new</span> ForkJoinTaskExample(<span class="number">1</span>, <span class="number">100</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//执行一个任务</span></span><br><span class="line">        Future&lt;Integer&gt; result = forkjoinPool.submit(task);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            log.info(<span class="string">"result:&#123;&#125;"</span>, result.get());</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            log.error(<span class="string">"exception"</span>, e);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>需要特别注意的是：<br>① ForkJoinPool 使用submit 或 invoke 提交的区别：invoke是同步执行，调用之后需要等待任务完成，才能执行后面的代码；submit是异步执行，只有在Future调用get的时候会阻塞。<br>② 这里继承的是RecursiveTask，还可以继承RecursiveAction。前者适用于有返回值的场景，而后者适合于没有返回值的场景<br>③ 这一点是最容易忽略的地方，其实这里执行子任务调用fork方法并不是最佳的选择，最佳的选择是invokeAll方法。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">leftTask.fork();  </span><br><span class="line">rightTask.fork();</span><br><span class="line">替换为</span><br><span class="line">invokeAll(leftTask, rightTask);</span><br><span class="line"></span><br><span class="line"><span class="comment">//具体说一下原理：对于Fork/Join模式，假如Pool里面线程数量是固定的，那么调用子任务的fork方法相当于A先分工给B，然后A当监工不干活，B去完成A交代的任务。所以上面的模式相当于浪费了一个线程。那么如果使用invokeAll相当于A分工给B后，A和B都去完成工作。这样可以更好的利用线程池，缩短执行的时间。</span></span><br></pre></td></tr></table></figure></p>
 <p>参考资料：<br><a href="http://fangjian0423.github.io/page/6/" target="_blank" rel="noopener">http://fangjian0423.github.io/page/6/</a></p>
 
       
@@ -475,6 +479,18 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">开篇</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">前端</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">CSS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">线程池</a>
               </li>
              
@@ -487,19 +503,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">开篇</a>
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">前端</a>
+                <a href="javascript:void(0)" class="js-tag color2">javacc</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">mvvm</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">CSS</a>
+                <a href="javascript:void(0)" class="js-tag color5">编译原理</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -531,6 +543,10 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">mvvm</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Java Concurrent</a>
               </li>
              
@@ -547,6 +563,10 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">秒杀</a>
               </li>
              
@@ -556,22 +576,6 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Java Thread</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">java</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">javacc</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">编译原理</a>
               </li>
             
             <div class="clearfix"></div>

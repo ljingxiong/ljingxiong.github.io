@@ -174,17 +174,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h5 id="线程的三个特性"><a href="#线程的三个特性" class="headerlink" title="线程的三个特性"></a>线程的三个特性</h5><ul>
-<li>原子性<br>  （1）原子是构成物质的基本单位（当然电子等暂且不论），所以原子的意思代表着——“不可分”；<br>  （2）原子性是拒绝多线程操作的，不论是多核还是单核，具有原子性的量，同一时刻只能有一个线程来对它进行操作。简而言之，在整个操作过程中不会被线程调度器中断的操作，都可认为是原子性。例如 a=1是原子性操作，但是a++和a +=1就不是原子性操作。</li>
-<li>非原子性<br>  （1）也就是整个过程中会出现线程调度器中断操作的现象，例如：<br>  类似”a += b”这样的操作不具有原子性，在某些JVM中”a += b”可能要经过这样三个步骤：<br>  （1）取出a和b<br>  （2）计算a+b<br>  （3）将计算结果写入内存<br>  如果有两个线程t1,t2在进行这样的操作。t1在第二步做完之后还没来得及把数据写回内存就被线程调度器中断了，于是t2开始执行，t2执行完毕后t1又把没有完成的第三步做完。这个时候就出现了错误，相当于t2的计算结果被无视掉了。所以上面的买碘片例子在同步add方法之前，实际结果总是小于预期结果的，因为很多操作都被无视掉了。<br>  类似的，像”a++”这样的操作也都不具有原子性。所以在多线程的环境下一定要记得进行同步操作。</li>
-<li><p>可见性<br>  可见性volatile修饰词,可以应对多线程同时访问修改同一变量，由于相互的不可见性所带来的不可预期的结果，存在二义性的现象，出现的。<br>   多线程变量不可见：当一个线程对一变量a修改后，还没有来得及将修改后的a值回写到主存，而被线程调度器中断操作（或收回时间片），然后让另一线程进行对a变量的访问修改，这时候，后来的线程并不知道a值已经修改过，它使用的仍旧是修改之前的a值，这样修改后的a值就被另一线程覆盖掉了。</p>
-<p>   多线程变量可见：被volatile修饰的成员变量在每次被线程访问时，都强迫从内存中重读该成员变量的值；而且，当成员变量发生变化时，强迫线程将变化值回写到共享内存，这样在任何时刻两个不同线程总是看到某一成员变量的同一个值，这就是保证了可见性。</p>
-<pre><code>volatile使用场景：在两个或者更多的线程访问的成员变量上使用volatile。当要访问的变量已在synchronized代码块中，或者为常量时，不必使用。
-</code></pre><p>  由于使用volatile屏蔽掉了JVM中必要的代码优化，所以在效率上比较低，因此一定在必要时才使用此关键字。<br>  注意：<br>  如果给一个变量加上volatile修饰符，就相当于：每一个线程中一旦这个值发生了变化就马上刷新回主存，使得各个线程取出的值相同。编译器不要对这个变量的读、写操作做优化。但是值得注意的是，除了对long和double的简单操作之外，volatile并不能提供原子性。所以，就算你将一个变量修饰为volatile，但是对这个变量的操作并不是原子的，在并发环境下，还是不能避免错误的发生！</p>
-<p>   synchronized为一段操作或内存进行加锁，它具有互斥性。当线程要操作被synchronized修饰的内存或操作时，必须首先获得锁才能进行后续操作；但是在同一时刻只能有一个线程获得相同的一把锁（对象监视器），所以它只允许一个线程进行操作。</p>
-</li>
-<li>有序性<br>  防止编译器或者CPU对指令进行重排</li>
-</ul>
+        <h5 id="1-线程的三个特性"><a href="#1-线程的三个特性" class="headerlink" title="1. 线程的三个特性"></a>1. 线程的三个特性</h5><ul>
+<li><p><strong>原子性</strong><br>  提供了互斥访问，同一时刻只能有一个线程对它进行操作<br>  ① 所谓的原子性，就是在执行过程中不会被线程调度机制打断的操作，这种操作从开始就一直运行到结束，中间不存在任何上下文切换。例如 a=1是原子性操作，但是a++和a +=1就不是原子性操作。<br>  ② 原子性是拒绝多线程操作的，不论是多核还是单核，具有原子性的量，同一时刻只能有一个线程来对它进行操作。(提供了互斥访问)<br>  ③ 原子性操作是要硬件层面的支持。a++操作为例,这是一个典型的‘读改写’的操作。在多线程的情况下，必须需要<code>硬件的支持</code>来保证‘读改写’的原子性，底层原理可以简单理解，通过<code>锁总线</code>的方式来实现。</p>
         
       
 
@@ -1100,6 +1091,18 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">开篇</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">前端</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">CSS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">线程池</a>
               </li>
              
@@ -1112,19 +1115,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">开篇</a>
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">前端</a>
+                <a href="javascript:void(0)" class="js-tag color2">javacc</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">mvvm</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">CSS</a>
+                <a href="javascript:void(0)" class="js-tag color5">编译原理</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1156,6 +1155,10 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">mvvm</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Java Concurrent</a>
               </li>
              
@@ -1172,6 +1175,10 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">秒杀</a>
               </li>
              
@@ -1181,22 +1188,6 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Java Thread</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">JavaScript</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">java</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">javacc</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">编译原理</a>
               </li>
             
             <div class="clearfix"></div>
